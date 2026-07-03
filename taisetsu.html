@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>大切にしていること｜Junko 50代からのからだ戦略コーチ</title>
+<meta name="description" content="頑張ることを、やめなくていい。持ち方を、変えるだけ。Junkoが大切にしていることを綴ったページです。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600&family=Alex+Brush&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- ================================================
+     ▼ ヘッダー（共通）
+================================================ -->
+<header class="header">
+  <div class="header-inner">
+    <a class="logo" href="index.html">
+      <span class="logo-script">Junko</span>
+      <span class="logo-sub">50代からのからだ戦略コーチ</span>
+    </a>
+    <nav class="nav">
+      <a href="about.html">はじめまして</a>
+      <a href="taisetsu.html">大切にしていること</a>
+      <a href="service.html">サービス</a>
+      <a href="access.html">施術場所</a>
+      <a href="index.html#voice">お客様の声</a>
+    </nav>
+    <!-- ▼ 予約ボタンのリンク先：予約サイトのURLに差し替え -->
+    <a class="btn btn-header" href="#">ご予約はこちら</a>
+  </div>
+</header>
+
+<main class="poem">
+
+<!-- ================================================
+     ▼ ページの見出し
+================================================ -->
+<section class="poem-head">
+  <p class="page-head-en">Essence</p>
+  <h1 class="poem-title">大切にしていること</h1>
+</section>
+
+<!-- ================================================
+     ▼ 詩のように読む本文
+     ※ ここから下はぜんぶ、ソウの下書き。
+        じゅんじゅんの言葉に磨き直すのが前提
+================================================ -->
+
+<section class="verse fade">
+  <p>
+    頑張らないでください、とは<br>
+    言いません。
+  </p>
+  <p>
+    頑張ってきた時間も、<br>
+    あなたの一部だから。
+  </p>
+</section>
+
+<section class="verse fade">
+  <p>
+    手放さなくて、いい。
+  </p>
+  <p>
+    持ち方を、変えるだけ。
+  </p>
+</section>
+
+<section class="verse fade">
+  <p>
+    頭は、ときどき嘘をつきます。
+  </p>
+  <p>
+    「まだいける」とか、<br>
+    「これくらい平気」とか。
+  </p>
+  <p>
+    体は、嘘をつきません。
+  </p>
+</section>
+
+<section class="verse fade">
+  <p>
+    休んでも回復しないのは、<br>
+    あなたが弱いからではなく、
+  </p>
+  <p>
+    体がまだ、<br>
+    安心していないから。
+  </p>
+</section>
+
+<section class="verse fade">
+  <p>
+    安心すると、<br>
+    人は変わりはじめます。
+  </p>
+  <p>
+    変えようとしなくても、<br>
+    変わりはじめる。
+  </p>
+  <p>
+    それを、何度も見てきました。
+  </p>
+</section>
+
+<section class="verse fade">
+  <p>
+    だから私は、<br>
+    教えるより先に、<br>
+    感じてもらうことを大切にしています。
+  </p>
+  <p>
+    言葉より、体感。<br>
+    正しさより、実感。
+  </p>
+</section>
+
+<section class="verse fade">
+  <p>
+    やりたいことに、<br>
+    体がついてくる。
+  </p>
+  <p>
+    そんな人生は、<br>
+    何歳からでも、はじめられます。
+  </p>
+</section>
+
+<!-- ▼ しめくくり：静かにトップへ帰る道だけ置く -->
+<section class="poem-end fade">
+  <span class="poem-end-line"></span>
+  <a href="about.html">はじめまして、へ</a>
+</section>
+
+</main>
+
+<!-- ================================================
+     ▼ フッター（共通）
+================================================ -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="logo">
+      <span class="logo-script">Junko</span>
+      <span class="logo-sub">50代からのからだ戦略コーチ</span>
+    </div>
+    <nav class="footer-nav">
+      <a href="about.html">はじめまして</a>
+      <a href="taisetsu.html">大切にしていること</a>
+      <a href="service.html">サービス</a>
+      <a href="access.html">施術場所</a>
+      <a href="index.html#voice">お客様の声</a>
+    </nav>
+    <a class="footer-sns" href="#" aria-label="Instagram">
+      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1" fill="currentColor" stroke="none"/></svg>
+    </a>
+  </div>
+  <p class="footer-copy">© Junko – Body Strategy Coach</p>
+</footer>
+
+<script>
+// このページだけ、いっそうゆっくり現れる
+function reveal() {
+  document.querySelectorAll(".fade:not(.show)").forEach(el => {
+    if (el.getBoundingClientRect().top < window.innerHeight * 0.88) el.classList.add("show");
+  });
+}
+window.addEventListener("scroll", reveal, { passive: true });
+window.addEventListener("resize", reveal);
+reveal();
+</script>
+
+</body>
+</html>
