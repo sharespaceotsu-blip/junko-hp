@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- 検索エンジンに載せないための印 -->
+<meta name="robots" content="noindex, nofollow">
+<title>セルフケアの部屋（初級）｜Junko</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@400;500;700&family=Alex+Brush&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/style.css?v=3">
+</head>
+<body>
+
+<!-- ================================================
+     ▼ ヘッダー（専用ページはロゴだけの静かな版）
+================================================ -->
+<header class="header">
+  <div class="header-inner">
+    <a class="logo" href="../index.html">
+      <span class="logo-script">Junko</span>
+      <span class="logo-sub">50代からのからだ戦略コーチ</span>
+    </a>
+  </div>
+</header>
+
+<main class="room">
+
+<!-- ================================================
+     ▼ 部屋の入口
+================================================ -->
+<section class="room-head fade show">
+  <p class="page-head-en">Self-care Room</p>
+  <h1 class="room-title">セルフケアの部屋<span class="room-level">初級</span></h1>
+  <p class="room-lead">
+    このページは、じゅんじゅんのお客さまだけの練習室です。<br>
+    急がなくて大丈夫。ひとつずつ、体と仲良くなっていきましょう。
+  </p>
+</section>
+
+<!-- ================================================
+     ▼ 動画一覧
+     動画を増やすときは、下の video-card のかたまりを
+     コピーして、埋め込みURLとタイトルとメモを差し替える
+     （私に「この動画足して」と言えばやります）
+================================================ -->
+<section class="room-videos">
+
+  <!-- ── 1本目 ───────────────── -->
+  <article class="video-card fade">
+    <div class="video-frame">
+      <iframe src="https://www.youtube-nocookie.com/embed/ptyn0jD4I54" title="鎖骨と腕のヨシヨシ体操〜鼻炎編" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+    <div class="video-body">
+      <h2 class="video-title">鎖骨と腕のヨシヨシ体操〜鼻炎編</h2>
+      <p class="video-memo">
+        ※ここに、じゅんじゅんからの一言メモが入ります。<br>
+        例：「朝、顔を洗う前に1回どうぞ。強くこすらず、なでる程度で十分です。」
+      </p>
+    </div>
+  </article>
+
+</section>
+
+<!-- ================================================
+     ▼ 部屋の出口（LINEへの静かな導線）
+================================================ -->
+<section class="room-end fade">
+  <p>やってみて気づいたこと、分からないことは、<br>LINEで気軽に教えてくださいね。</p>
+  <a href="https://lin.ee/55zaTxn" target="_blank" rel="noopener">
+    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 11.5a8.5 8.5 0 0 1-8.5 8.5c-1.2 0-2.4-.2-3.4-.7L4 21l1.8-4.4A8.5 8.5 0 1 1 21 11.5z"/></svg>
+    LINEで送る <span class="btn-arrow">›</span>
+  </a>
+</section>
+
+</main>
+
+<footer class="footer">
+  <p class="footer-copy">© Junko – Body Strategy Coach</p>
+</footer>
+
+<script>
+// スクロールすると、ふわっと現れる動き（控えめ）
+function reveal() {
+  document.querySelectorAll(".fade:not(.show)").forEach(el => {
+    if (el.getBoundingClientRect().top < window.innerHeight * 0.92) el.classList.add("show");
+  });
+}
+window.addEventListener("scroll", reveal, { passive: true });
+window.addEventListener("resize", reveal);
+reveal();
+</script>
+
+</body>
+</html>
