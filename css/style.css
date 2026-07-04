@@ -173,12 +173,16 @@ a { color: inherit; text-decoration: none; }
   animation: heroIn 1.6s ease 0.5s both;
 }
 
-/* 署名のような名乗り（控えめに、でも残るように） */
+/* 署名のような名乗り（控えめに、でも残るように）
+   1行目：──付き、2行目は「50代」の真下に揃う */
 .hero-name {
   margin-top: 44px;
   font-size: 14.5px;
   letter-spacing: 0.18em;
+  line-height: 2.1;
   color: var(--ink);
+  padding-left: 44px;    /* 線（30px）＋間（14px）のぶん */
+  text-indent: -44px;    /* 1行目だけ線の位置まで戻す */
   animation: heroIn 1.6s ease 1s both;
 }
 .hero-name::before {
