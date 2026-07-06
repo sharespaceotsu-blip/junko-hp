@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>夜のチェック｜明日の元気のために</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+/* ================================================
+   夜のチェック（LIFF用プロトタイプ）
+   junko-hpと同じ世界観：生成り×金茶×明朝
+================================================ */
+:root {
+  --ink: #3b362d;
+  --ink-soft: #635d51;
+  --bg: #fdfcfa;
+  --bg-warm: #f4f1ea;
+  --gold: #c0a273;
+  --gold-deep: #ab8d5e;
+  --line: #e4ddd0;
+  --night: #4a4a5e;      /* 夜のさしいろ（深い藍） */
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: "Shippori Mincho B1", serif;
+  font-weight: 500;
+  color: var(--ink);
+  background: linear-gradient(175deg, #f7f3ea 0%, #fdfcfa 30%, #f4f1ea 100%);
+  line-height: 1.9;
+  letter-spacing: 0.06em;
+  font-size: 15px;
+  padding-bottom: 60px;
+}
+
+/* ---- ヘッダー ---- */
+.head {
+  text-align: center;
+  padding: 34px 24px 18px;
+}
+.head-moon { font-size: 26px; }
+.head h1 {
+  font-size: 19px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: #554431;
+  margin-top: 6px;
+}
+.head p {
+  margin-top: 8px;
+  font-size: 12.5px;
+  color: var(--ink-soft);
+}
+
+/* ---- 質問カード ---- */
+.list { max-width: 480px; margin: 0 auto; padding: 6px 18px; }
+.card {
+  background: rgba(255,255,255,0.85);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 18px 18px 16px;
+  margin-bottom: 14px;
+  box-shadow: 0 4px 18px rgba(160, 145, 115, 0.08);
+}
+.card-title {
+  font-size: 14.5px;
+  font-weight: 700;
+  color: #554431;
+  letter-spacing: 0.1em;
+}
+.card-title .icon { margin-right: 6px; }
+.card-note {
+  font-size: 11.5px;
+  color: var(--ink-soft);
+  margin-top: 2px;
+  line-height: 1.7;
+}
+
+/* ---- 選択ボタン ---- */
+.opts { display: flex; gap: 8px; margin-top: 12px; flex-wrap: wrap; }
+.opt {
+  flex: 1;
+  min-width: 84px;
+  border: 1px solid var(--line);
+  background: #fff;
+  border-radius: 999px;
+  padding: 9px 6px;
+  font-family: inherit;
+  font-size: 13px;
+  letter-spacing: 0.06em;
+  color: var(--ink-soft);
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+.opt.on {
+  background: linear-gradient(135deg, var(--gold), var(--gold-deep));
+  border-color: var(--gold-deep);
+  color: #fff;
+  font-weight: 700;
+}
+
+/* 出すワークの3択は縦に */
+.opts.tate { flex-direction: column; }
+.opts.tate .opt { text-align: left; padding: 10px 16px; border-radius: 12px; }
+
+/* ---- メモ ---- */
+textarea {
+  width: 100%;
+  margin-top: 12px;
+  border: 1px dashed var(--line);
+  border-radius: 12px;
+  background: #fffdf9;
+  padding: 10px 12px;
+  font-family: inherit;
+  font-size: 13px;
+  color: var(--ink);
+  min-height: 64px;
+  resize: vertical;
+}
+textarea:focus { outline: 1.5px solid var(--gold); }
+
+/* ---- 送信 ---- */
+.send-area { text-align: center; padding: 16px 24px 10px; }
+.send {
+  font-family: inherit;
+  background: linear-gradient(135deg, var(--night), #37374a);
+  color: #f5efe2;
+  border: none;
+  border-radius: 999px;
+  font-size: 15px;
+  letter-spacing: 0.2em;
+  padding: 15px 58px;
+  cursor: pointer;
+  box-shadow: 0 6px 24px rgba(74, 74, 94, 0.35);
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+.send:active { transform: scale(0.98); }
+.send-note { margin-top: 10px; font-size: 11px; color: var(--ink-soft); }
+
+/* ---- 送信後 ---- */
+.done {
+  display: none;
+  text-align: center;
+  padding: 70px 30px;
+}
+.done.show { display: block; }
+.done-moon { font-size: 40px; }
+.done h2 {
+  font-size: 18px;
+  font-weight: 700;
+  color: #554431;
+  margin-top: 14px;
+  letter-spacing: 0.14em;
+}
+.done p { margin-top: 12px; font-size: 13.5px; color: var(--ink-soft); }
+.done .count {
+  display: inline-block;
+  margin-top: 20px;
+  background: #fff;
+  border: 1px solid var(--gold);
+  color: var(--gold-deep);
+  border-radius: 999px;
+  padding: 8px 26px;
+  font-size: 13px;
+}
+
+/* ---- 医療の線引き ---- */
+.foot {
+  max-width: 480px;
+  margin: 18px auto 0;
+  padding: 0 26px;
+  font-size: 10.5px;
+  color: #a39c8e;
+  text-align: center;
+  line-height: 1.8;
+}
+</style>
+</head>
+<body>
+
+<div id="form">
+  <header class="head">
+    <div class="head-moon">🌙</div>
+    <h1>夜のチェック</h1>
+    <p>できたことに、そっと印をつけるだけ。<br>ぜんぶ答えなくても大丈夫。</p>
+  </header>
+
+  <main class="list">
+
+    <div class="card" data-key="caffeine">
+      <div class="card-title"><span class="icon">☕</span>カフェイン門限</div>
+      <div class="card-note">自分で決めた門限、今日はどうだった？</div>
+      <div class="opts">
+        <button class="opt">門限内</button>
+        <button class="opt">今日は越えた</button>
+      </div>
+    </div>
+
+    <div class="card" data-key="alcohol">
+      <div class="card-title"><span class="icon">🍷</span>今夜のお酒</div>
+      <div class="opts">
+        <button class="opt">なし</button>
+        <button class="opt">少し</button>
+        <button class="opt">しっかり</button>
+      </div>
+    </div>
+
+    <div class="card" data-key="bath">
+      <div class="card-title"><span class="icon">🛁</span>お風呂</div>
+      <div class="card-note">寝る1〜2時間前の湯船が、眠りのスイッチ。</div>
+      <div class="opts">
+        <button class="opt">1〜2時間前</button>
+        <button class="opt">寝る直前</button>
+        <button class="opt">湯船なし</button>
+      </div>
+    </div>
+
+    <div class="card" data-key="dinner">
+      <div class="card-title"><span class="icon">🍚</span>晩ごはん</div>
+      <div class="opts">
+        <button class="opt">早め・軽め</button>
+        <button class="opt">ふつう</button>
+        <button class="opt">遅め・重め</button>
+      </div>
+    </div>
+
+    <div class="card" data-key="dasu">
+      <div class="card-title"><span class="icon">✍️</span>出すワーク（どれでもひとつ）</div>
+      <div class="card-note">頭の中のものを、外に出してから眠る。今夜の気分で。</div>
+      <div class="opts tate">
+        <button class="opt">① 気になることを、ぐちゃぐちゃ書き</button>
+        <button class="opt">② 明日やることを、書き出した</button>
+        <button class="opt">③ 今日の「ありがとう」を3つ</button>
+        <button class="opt">今日はしない</button>
+      </div>
+    </div>
+
+    <div class="card" data-key="work">
+      <div class="card-title"><span class="icon">🤲</span>体のワーク</div>
+      <div class="card-note">鎖骨トントン、背中ゆるめ、ヨシヨシ…お気に入りをひとつ。</div>
+      <div class="opts">
+        <button class="opt">やった</button>
+        <button class="opt">ちょっとだけ</button>
+        <button class="opt">今日はしない</button>
+      </div>
+    </div>
+
+    <div class="card" data-key="kokoro">
+      <div class="card-title"><span class="icon">🕯️</span>寝る前の心</div>
+      <div class="card-note">どちらでもいいんです。ただ測るだけ。</div>
+      <div class="opts">
+        <button class="opt">中立（しずか）</button>
+        <button class="opt">緊張（まだ張ってる）</button>
+      </div>
+    </div>
+
+    <div class="card" data-key="memo">
+      <div class="card-title"><span class="icon">📖</span>ひとことメモ（あれば）</div>
+      <textarea placeholder="ぐちゃぐちゃでいい。きれいに書かなくていい。"></textarea>
+    </div>
+
+  </main>
+
+  <div class="send-area">
+    <button class="send" onclick="finish()">おやすみの記録をする</button>
+    <div class="send-note">押したら、あとは眠るだけ。</div>
+  </div>
+
+  <p class="foot">つらい不眠や更年期の症状が続くときは、婦人科や睡眠外来へ。<br>これは医療ではなく、その手前の「環境と習慣のデザイン」です。</p>
+</div>
+
+<div class="done" id="done">
+  <div class="done-moon">🌙</div>
+  <h2>記録したよ。</h2>
+  <p>できた日も、しない日も、ぜんぶ今日の1ページ。<br>あとは、あったかくして眠るだけ。</p>
+  <div class="count">📖 記録が <span id="total">—</span> 個たまりました</div>
+</div>
+
+<script>
+// ---- 配線先（GASウェブアプリ）----
+const GAS_URL = 'https://script.google.com/macros/s/AKfycbyDgFxz_xBfY3ZWs8LtzcKq3RwwBQvsWHpE26kZ9gCCFqRJ3omhazpJOQvShxG1IVZn_Q/exec';
+// LINEから配られる専用リンクの ?u= で本人を識別
+const USER_ID = new URLSearchParams(location.search).get('u') || 'guest';
+
+// 選択ボタン（同じカード内はひとつだけ選べる）
+document.querySelectorAll('.card').forEach(card => {
+  card.querySelectorAll('.opt').forEach(btn => {
+    btn.addEventListener('click', () => {
+      card.querySelectorAll('.opt').forEach(b => b.classList.remove('on'));
+      btn.classList.add('on');
+    });
+  });
+});
+
+// 送信 → GAS → スプレッドシート
+function finish() {
+  const answers = {};
+  document.querySelectorAll('.card').forEach(card => {
+    const sel = card.querySelector('.opt.on');
+    if (sel) answers[card.dataset.key] = sel.textContent;
+    const memo = card.querySelector('textarea');
+    if (memo && memo.value.trim()) answers.memo = memo.value.trim();
+  });
+  fetch(GAS_URL, {
+    method: 'POST',
+    mode: 'no-cors',
+    body: JSON.stringify({ kind: 'yoru', u: USER_ID, answers: answers })
+  }).catch(function(){});
+  document.getElementById('form').style.display = 'none';
+  document.getElementById('done').classList.add('show');
+  window.scrollTo(0, 0);
+  // 累計をシートから取得（きらきらの本物の数字）
+  setTimeout(fetchTotal, 1200);
+}
+function fetchTotal() {
+  const s = document.createElement('script');
+  window.__cb = function(d) {
+    document.getElementById('total').textContent = d.total;
+  };
+  s.src = GAS_URL + '?count=1&u=' + encodeURIComponent(USER_ID) + '&callback=__cb';
+  document.body.appendChild(s);
+}
+</script>
+
+</body>
+</html>
