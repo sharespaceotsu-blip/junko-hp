@@ -120,6 +120,21 @@ textarea {
 }
 textarea:focus { outline: 1.5px solid var(--gold); }
 
+/* ---- 時間のプルダウン（カフェイン用） ---- */
+select.timesel {
+  width: 100%;
+  margin-top: 12px;
+  border: 1px solid var(--line);
+  background: #fff;
+  border-radius: 12px;
+  padding: 10px 12px;
+  font-family: inherit;
+  font-size: 13px;
+  color: var(--ink);
+  letter-spacing: 0.06em;
+}
+select.timesel:focus { outline: 1.5px solid var(--gold); }
+
 /* ---- 送信 ---- */
 .send-area { text-align: center; padding: 16px 24px 10px; }
 .send {
@@ -188,15 +203,6 @@ textarea:focus { outline: 1.5px solid var(--gold); }
 
   <main class="list">
 
-    <div class="card" data-key="caffeine">
-      <div class="card-title"><span class="icon">☕</span>カフェイン門限</div>
-      <div class="card-note">自分で決めた門限、今日はどうだった？</div>
-      <div class="opts">
-        <button class="opt">門限内</button>
-        <button class="opt">今日は越えた</button>
-      </div>
-    </div>
-
     <div class="card" data-key="alcohol">
       <div class="card-title"><span class="icon">🍷</span>今夜のお酒</div>
       <div class="opts">
@@ -225,6 +231,21 @@ textarea:focus { outline: 1.5px solid var(--gold); }
       </div>
     </div>
 
+    <div class="card" data-key="caffeine">
+      <div class="card-title"><span class="icon">☕</span>カフェイン、最後は何時？</div>
+      <div class="card-note">責める話じゃなくて、ただの記録。（コーヒー・紅茶・緑茶・エナジー系）</div>
+      <select class="timesel">
+        <option value="">選んでね（24時間制）</option>
+        <option>とってない</option>
+        <option>5時</option><option>6時</option><option>7時</option><option>8時</option>
+        <option>9時</option><option>10時</option><option>11時</option><option>12時</option>
+        <option>13時</option><option>14時</option><option>15時</option><option>16時</option>
+        <option>17時</option><option>18時</option><option>19時</option><option>20時</option>
+        <option>21時</option><option>22時</option><option>23時</option>
+        <option>0時</option><option>1時</option><option>2時</option><option>3時</option><option>4時</option>
+      </select>
+    </div>
+
     <div class="card" data-key="dasu">
       <div class="card-title"><span class="icon">✍️</span>出すワーク（どれでもひとつ）</div>
       <div class="card-note">頭の中のものを、外に出してから眠る。今夜の気分で。</div>
@@ -240,19 +261,19 @@ textarea:focus { outline: 1.5px solid var(--gold); }
       <div class="card-title"><span class="icon">🤲</span>体のワーク</div>
       <div class="card-note">鎖骨トントン、背中ゆるめ、ヨシヨシ…お気に入りをひとつ。</div>
       <div class="opts">
-        <button class="opt">やった</button>
+        <button class="opt">やった（やるよ）</button>
         <button class="opt">ちょっとだけ</button>
         <button class="opt">今日はしない</button>
       </div>
     </div>
 
     <div class="card" data-key="kokoro">
-      <div class="card-title"><span class="icon">🕯️</span>寝る前の心</div>
+      <div class="card-title"><span class="icon">🕯️</span>今の気持ちと体、どうなってる？</div>
       <div class="card-note">どれでもいいんです。ただ測るだけ。</div>
       <div class="opts">
-        <button class="opt">緊張（まだ張ってる）</button>
-        <button class="opt">中立（しずか）</button>
-        <button class="opt">楽しみでワクワク</button>
+        <button class="opt">まだ緊張</button>
+        <button class="opt">中立</button>
+        <button class="opt">なんか楽しい</button>
       </div>
     </div>
 
@@ -300,6 +321,8 @@ function finish() {
   document.querySelectorAll('.card').forEach(card => {
     const sel = card.querySelector('.opt.on');
     if (sel) answers[card.dataset.key] = sel.textContent;
+    const dd = card.querySelector('select');
+    if (dd && dd.value) answers[card.dataset.key] = dd.value;
     const memo = card.querySelector('textarea');
     if (memo && memo.value.trim()) answers.memo = memo.value.trim();
   });
