@@ -1,0 +1,137 @@
+/* ================================================
+   募集ページ専用の追い足しスタイル（このページ内だけ）
+   世界観＝生成り×金茶のまま、少しポップに・行動を促す形に
+================================================ */
+.p-badge {
+  display: inline-block;
+  background: linear-gradient(135deg, #c0a273, #ab8d5e);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  border-radius: 999px;
+  padding: 6px 18px;
+  margin-bottom: 12px;
+}
+.p-badge.p-badge-line { background: #fff; color: #ab8d5e; border: 1.5px solid #c0a273; }
+
+.p-card {
+  max-width: 720px;
+  margin: 0 auto 34px;
+  background: rgba(255,255,255,0.92);
+  border: 1px solid #e4ddd0;
+  border-radius: 20px;
+  padding: 36px 30px 32px;
+  box-shadow: 0 8px 30px rgba(160,145,115,0.10);
+  text-align: center;
+}
+.p-card h2 { font-size: clamp(19px, 2.6vw, 24px); font-weight: 700; color: #554431; letter-spacing: 0.08em; }
+.p-card .p-lead { margin-top: 10px; font-size: 13.5px; color: #635d51; line-height: 2; }
+
+.p-steps { display: flex; justify-content: center; gap: 6px; flex-wrap: wrap; margin-top: 18px; }
+.p-steps span {
+  background: #f4f1ea;
+  border-radius: 999px;
+  font-size: 11.5px;
+  color: #554431;
+  padding: 6px 14px;
+}
+.p-steps .p-arrow { background: none; color: #c0a273; padding: 6px 0; }
+
+.p-check { text-align: left; max-width: 420px; margin: 20px auto 0; }
+.p-check li {
+  list-style: none;
+  font-size: 13.5px;
+  color: #3b362d;
+  padding: 7px 0 7px 30px;
+  position: relative;
+  border-bottom: 1px dashed #e4ddd0;
+}
+.p-check li:last-child { border-bottom: none; }
+.p-check li::before {
+  content: "✓";
+  position: absolute; left: 6px;
+  color: #c0a273; font-weight: 700;
+}
+
+.p-cta {
+  display: inline-block;
+  margin-top: 24px;
+  background: linear-gradient(135deg, #c0a273, #ab8d5e);
+  color: #fff;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  border-radius: 999px;
+  padding: 16px 46px;
+  text-decoration: none;
+  box-shadow: 0 6px 22px rgba(171,141,94,0.35);
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+.p-cta:hover { transform: translateY(-2px); box-shadow: 0 10px 26px rgba(171,141,94,0.45); }
+.p-cta-note { margin-top: 10px; font-size: 11px; color: #a39c8e; }
+
+.p-nums { display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; margin: 8px auto 0; }
+.p-num {
+  background: #fff;
+  border: 1px solid #e4ddd0;
+  border-radius: 16px;
+  padding: 16px 22px;
+  min-width: 110px;
+}
+.p-num b { display: block; font-size: 24px; color: #ab8d5e; }
+.p-num span { font-size: 11px; color: #635d51; }
+
+.p-voice {
+  max-width: 600px; margin: 0 auto 14px;
+  background: #fffdf9;
+  border-left: 3px solid #c0a273;
+  border-radius: 0 14px 14px 0;
+  padding: 16px 20px;
+  text-align: left;
+  font-size: 13px; color: #3b362d; line-height: 1.9;
+}
+.p-voice small { display: block; margin-top: 6px; color: #a39c8e; }
+
+.tbd {
+  border: 1.5px dashed #d8b980;
+  background: #fdf8ee;
+  border-radius: 10px;
+  padding: 2px 10px;
+  color: #ab8d5e;
+  font-size: 12px;
+}
+
+.p-section-title { text-align: center; font-size: 17px; font-weight: 700; color: #554431; letter-spacing: 0.14em; margin: 60px 0 22px; }
+.p-section-title .en { display: block; font-family: "Alex Brush", cursive; font-size: 30px; color: #c0a273; font-weight: 400; margin-bottom: 2px; }
+.p-wrap { padding: 0 20px 30px; }
+
+/* ---- 動画の置き場（4枠グリッド） ---- */
+.p-videos {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+  max-width: 720px;
+  margin: 0 auto;
+}
+@media (max-width: 640px) { .p-videos { grid-template-columns: 1fr; } }
+.p-video {
+  background: rgba(255,255,255,0.92);
+  border: 1px solid #e4ddd0;
+  border-radius: 16px;
+  padding: 14px;
+  text-align: left;
+  box-shadow: 0 4px 16px rgba(160,145,115,0.08);
+}
+.p-video-frame {
+  aspect-ratio: 16 / 9;
+  background: linear-gradient(135deg, #f4f1ea, #eae4d6);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #c0a273;
+  font-size: 34px;
+}
+.p-video h3 { margin-top: 10px; font-size: 14px; font-weight: 700; color: #554431; letter-spacing: 0.06em; }
+.p-video p { margin-top: 4px; font-size: 12px; color: #635d51; line-height: 1.8; }

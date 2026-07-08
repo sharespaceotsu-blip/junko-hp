@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>会員動画ライブラリ｜Junko 50代からのからだ戦略コーチ</title>
+<meta name="description" content="会員のみなさまへ。じゅんじゅんの会員限定動画ライブラリ。">
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@400;500;700&family=Alex+Brush&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css?v=5">
+<link rel="stylesheet" href="css/program.css?v=1">
+</head>
+<body>
+
+<header class="header">
+  <div class="header-inner">
+    <a class="logo" href="index.html">
+      <span class="logo-script">Junko</span>
+      <span class="logo-sub">50代からの<br class="sp-only">からだ戦略コーチ</span>
+    </a>
+    <button class="nav-toggle" aria-label="メニューを開く"><span></span><span></span><span></span></button>
+    <nav class="nav">
+      <a href="about.html">はじめまして</a>
+      <a href="taisetsu.html">大切にしていること</a>
+      <a href="service.html">サービス</a>
+      <a href="shijutsu.html">施術について</a>
+      <a href="ritsuyou.html">立腰体操</a>
+      <a href="access.html">施術場所</a>
+      <a href="index.html#voice">お客様の声</a>
+    </nav>
+    <a class="btn btn-header" href="service.html">ご予約はこちら</a>
+  </div>
+</header>
+
+<main>
+
+<section class="page-head">
+  <p class="page-head-en">Members Library</p>
+  <h1 class="page-head-title">会員動画ライブラリ</h1>
+  <p class="page-head-lead">
+    会員のみなさまへ。<br>
+    今月の動画と、これまでのアーカイブです。
+  </p>
+</section>
+
+<div class="p-wrap">
+
+<section class="fade" style="text-align:center; margin-top:6px;">
+  <span class="p-badge">会員限定</span>
+  <p style="margin-top:8px;"><span class="tbd">★このページのURLは会員だけに案内する（ナビ・検索には出ません）</span></p>
+</section>
+
+<!-- ▼ 会員動画の置き場（4枠）
+     ★動画を入れるとき：p-video-frame の中身を
+     限定公開YouTubeの埋め込み <iframe src="https://www.youtube.com/embed/動画ID" ...> に差し替える -->
+<section class="fade" style="margin-top:20px;">
+  <div class="p-videos">
+    <div class="p-video">
+      <div class="p-video-frame">▶</div>
+      <h3>★会員動画タイトル1</h3>
+      <p>★ひとこと説明（例：今月のZoomアーカイブ前編）</p>
+    </div>
+    <div class="p-video">
+      <div class="p-video-frame">▶</div>
+      <h3>★会員動画タイトル2</h3>
+      <p>★ひとこと説明</p>
+    </div>
+    <div class="p-video">
+      <div class="p-video-frame">▶</div>
+      <h3>★会員動画タイトル3</h3>
+      <p>★ひとこと説明</p>
+    </div>
+    <div class="p-video">
+      <div class="p-video-frame">▶</div>
+      <h3>★会員動画タイトル4</h3>
+      <p>★ひとこと説明</p>
+    </div>
+  </div>
+</section>
+
+<!-- ▼ 次回Zoomの案内枠 -->
+<section class="fade" style="text-align:center; margin-top:44px;">
+  <div class="p-card">
+    <h2>次回のZoom</h2>
+    <p class="p-lead"><span class="tbd">★◯月◯日（★）◯時〜／テーマ：★</span></p>
+    <a class="p-cta" href="#" rel="noopener">★Zoomリンク（当日に有効化）</a>
+  </div>
+</section>
+
+</div>
+
+<section class="line-bar fade">
+  <p>ご不明な点やご相談は、LINEからお気軽にご連絡ください。</p>
+  <a href="https://lin.ee/55zaTxn" target="_blank" rel="noopener">
+    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 11.5a8.5 8.5 0 0 1-8.5 8.5c-1.2 0-2.4-.2-3.4-.7L4 21l1.8-4.4A8.5 8.5 0 1 1 21 11.5z"/></svg>
+    LINEで相談する <span class="btn-arrow">›</span>
+  </a>
+</section>
+
+</main>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="logo">
+      <span class="logo-script">Junko</span>
+      <span class="logo-sub">50代からのからだ戦略コーチ</span>
+    </div>
+    <nav class="footer-nav">
+      <a href="about.html">はじめまして</a>
+      <a href="taisetsu.html">大切にしていること</a>
+      <a href="service.html">サービス</a>
+      <a href="shijutsu.html">施術について</a>
+      <a href="ritsuyou.html">立腰体操</a>
+      <a href="access.html">施術場所</a>
+      <a href="index.html#voice">お客様の声</a>
+    </nav>
+  </div>
+  <p class="footer-copy">© Junko – Body Strategy Coach</p>
+</footer>
+
+<script>
+function reveal() {
+  document.querySelectorAll(".fade:not(.show)").forEach(el => {
+    if (el.getBoundingClientRect().top < window.innerHeight * 0.92) el.classList.add("show");
+  });
+}
+window.addEventListener("scroll", reveal, { passive: true });
+window.addEventListener("resize", reveal);
+reveal();
+const toggle = document.querySelector(".nav-toggle");
+if (toggle) toggle.addEventListener("click", () => document.querySelector(".header").classList.toggle("menu-open"));
+document.querySelectorAll(".nav a").forEach(a => a.addEventListener("click", () => document.querySelector(".header").classList.remove("menu-open")));
+</script>
+
+</body>
+</html>

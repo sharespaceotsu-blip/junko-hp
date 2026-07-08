@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>今夜の眠り、環境診断｜Junko 50代からのからだ戦略コーチ</title>
+<meta name="description" content="登録なし・3分・その場で結果。今夜のあなたの眠りの環境を、そっと診断します。">
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@400;500;700&family=Alex+Brush&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css?v=5">
+<link rel="stylesheet" href="css/program.css?v=1">
+<style>
+/* 診断ページ専用 */
+.s-card {
+  max-width: 520px;
+  margin: 0 auto 14px;
+  background: rgba(255,255,255,0.9);
+  border: 1px solid #e4ddd0;
+  border-radius: 16px;
+  padding: 18px 18px 16px;
+  box-shadow: 0 4px 18px rgba(160,145,115,0.08);
+}
+.s-q { font-size: 14px; font-weight: 700; color: #554431; letter-spacing: 0.06em; }
+.s-note { font-size: 11px; color: #a39c8e; margin-top: 2px; }
+.s-opts { display: flex; gap: 8px; margin-top: 12px; flex-wrap: wrap; }
+.s-opts.tate { flex-direction: column; }
+.s-opts.tate .s-opt { text-align: left; border-radius: 12px; }
+.s-opt {
+  flex: 1; min-width: 90px;
+  border: 1px solid #e4ddd0; background: #fff;
+  border-radius: 999px; padding: 9px 8px;
+  font-family: inherit; font-size: 12.5px; letter-spacing: 0.04em;
+  color: #635d51; cursor: pointer; transition: all .2s ease;
+}
+.s-opt.on {
+  background: linear-gradient(135deg, #c0a273, #ab8d5e);
+  border-color: #ab8d5e; color: #fff; font-weight: 700;
+}
+.s-free {
+  width: 100%; margin-top: 12px;
+  border: 1px dashed #e4ddd0; border-radius: 12px;
+  background: #fffdf9; padding: 10px 12px;
+  font-family: inherit; font-size: 13px; color: #3b362d;
+  min-height: 64px; resize: vertical;
+}
+.s-free:focus, .s-name:focus { outline: 1.5px solid #c0a273; }
+.s-name {
+  width: 100%; margin-top: 12px;
+  border: 1px solid #e4ddd0; border-radius: 999px;
+  background: #fff; padding: 9px 16px;
+  font-family: inherit; font-size: 13px; color: #3b362d;
+}
+.s-bundle {
+  text-align: center; font-size: 13px; font-weight: 700;
+  color: #ab8d5e; letter-spacing: 0.2em; margin: 34px 0 14px;
+}
+.s-disclaimer {
+  max-width: 520px; margin: 18px auto 0; text-align: center;
+  font-size: 10.5px; color: #a39c8e; line-height: 1.8;
+}
+.s-result { display: none; max-width: 560px; margin: 0 auto; text-align: center; }
+.s-result.show { display: block; }
+.s-count {
+  display: inline-block; background: #fff; border: 1px solid #e4ddd0;
+  border-radius: 999px; padding: 5px 16px; font-size: 11.5px; color: #a39c8e; margin-bottom: 14px;
+}
+.s-type {
+  background: rgba(255,255,255,0.95); border: 1.5px solid #c0a273;
+  border-radius: 20px; padding: 34px 26px; box-shadow: 0 8px 30px rgba(160,145,115,0.12);
+}
+.s-type h2 { font-size: 20px; font-weight: 700; color: #554431; letter-spacing: 0.1em; }
+.s-type .s-sub { margin-top: 10px; font-size: 13.5px; color: #635d51; line-height: 2; }
+.s-profile { margin-top: 14px; font-size: 11.5px; color: #a39c8e; }
+.s-point {
+  margin-top: 18px; background: #fdf8ee; border-radius: 12px;
+  padding: 14px 16px; font-size: 13px; color: #3b362d; line-height: 1.9; text-align: left;
+}
+.s-point b { color: #ab8d5e; }
+.s-close { margin-top: 22px; font-size: 12.5px; color: #635d51; line-height: 2; }
+.s-bars { display: flex; justify-content: center; gap: 12px; margin-top: 18px; }
+.s-bar { text-align: center; font-size: 11px; color: #635d51; }
+.s-bar-track { width: 52px; height: 8px; background: #eee8db; border-radius: 99px; margin: 6px auto 0; overflow: hidden; }
+.s-bar-fill { height: 100%; background: linear-gradient(90deg, #c0a273, #ab8d5e); border-radius: 99px; }
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="header-inner">
+    <a class="logo" href="index.html">
+      <span class="logo-script">Junko</span>
+      <span class="logo-sub">50代からの<br class="sp-only">からだ戦略コーチ</span>
+    </a>
+    <button class="nav-toggle" aria-label="メニューを開く"><span></span><span></span><span></span></button>
+    <nav class="nav">
+      <a href="about.html">はじめまして</a>
+      <a href="taisetsu.html">大切にしていること</a>
+      <a href="service.html">サービス</a>
+      <a href="shijutsu.html">施術について</a>
+      <a href="ritsuyou.html">立腰体操</a>
+      <a href="access.html">施術場所</a>
+      <a href="index.html#voice">お客様の声</a>
+    </nav>
+    <a class="btn btn-header" href="service.html">ご予約はこちら</a>
+  </div>
+</header>
+
+<main>
+
+<section class="page-head">
+  <p class="page-head-en">Check</p>
+  <h1 class="page-head-title">今夜の眠り、環境診断</h1>
+  <p class="page-head-lead">
+    登録なし・3分・その場で結果。<br>
+    正直に答えるほど、当たります。
+  </p>
+</section>
+
+<div class="p-wrap" id="quiz">
+  <!-- 質問はJS側の設定リスト（下のQUESTIONS）から自動生成。
+       文言の精査は QUESTIONS を書き換えるだけでOK -->
+  <div id="qbox"></div>
+
+  <p class="s-disclaimer">
+    ＊これは習慣をチェックする目的のもので、医療目的ではありません。<br>
+    あくまでご自身の気づきとしてご利用ください。
+  </p>
+
+  <div style="text-align:center; margin-top: 26px;">
+    <button class="p-cta" style="border:none; cursor:pointer; font-family:inherit;" onclick="diagnose()">診断する</button>
+    <p class="p-cta-note">答えなかった質問があっても大丈夫。</p>
+  </div>
+</div>
+
+<div class="s-result p-wrap" id="result">
+  <span class="s-count" id="countBadge"></span>
+  <div class="s-type">
+    <h2 id="typeName"></h2>
+    <p class="s-sub" id="typeSub"></p>
+    <div class="s-bars" id="bars"></div>
+    <div class="s-point" id="typePoint"></div>
+    <p class="s-profile" id="profileEcho"></p>
+  </div>
+  <p class="s-close">
+    この診断は、<strong>今夜1日の写真</strong>です。<br>
+    1回で体は変わらないし、変わらなくていい日もあります。<br>
+    気になったとき、また来てください。ちゃんと覚えています。<br><br>
+    本気で自分のパターンを知りたくなった日は——<br>
+    <strong>7日間、測る道具</strong>があります。
+  </p>
+  <a class="p-cta" href="https://line.me/R/oaMessage/%40007rtbeh/?%E7%9D%A1%E7%9C%A0" target="_blank" rel="noopener">LINEで「睡眠」と送って始める</a>
+  <p class="p-cta-note">友だち追加がまだの方は <a href="https://lin.ee/55zaTxn" target="_blank" rel="noopener" style="color:#ab8d5e;">こちら</a> から</p>
+</div>
+
+</main>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="logo">
+      <span class="logo-script">Junko</span>
+      <span class="logo-sub">50代からのからだ戦略コーチ</span>
+    </div>
+    <nav class="footer-nav">
+      <a href="about.html">はじめまして</a>
+      <a href="taisetsu.html">大切にしていること</a>
+      <a href="service.html">サービス</a>
+      <a href="shijutsu.html">施術について</a>
+      <a href="ritsuyou.html">立腰体操</a>
+      <a href="access.html">施術場所</a>
+      <a href="index.html#voice">お客様の声</a>
+    </nav>
+  </div>
+  <p class="footer-copy">© Junko – Body Strategy Coach</p>
+</footer>
+
+<script>
+// ================================================
+// 質問の設定リスト（精査はここを書き換えるだけ）
+// sec: 見出し／kind: single・multi・text・name
+// bundle: rhythm・stim・nest（＝採点に効く束）、nullは記録だけ
+// opts: [表示文, 点数]。点数nullは採点なし
+// 原則①心理的抵抗が強いもの（刺激）は最初に置かない
+// 原則②機能的な行動は採点しない。「過剰」だけそっと1点引く
+// ================================================
+const QUESTIONS = [
+  // ---- まずは、いまのあなた（採点なし・プロフィール） ----
+  { sec: 'まずは、いまのあなた', kind: 'single', bundle: null, id: 'health',
+    q: '今の健康状態は？',
+    opts: [['満足', null], ['もう少しスッキリしたい', null], ['問題を感じる', null]] },
+  { sec: 'まずは、いまのあなた', kind: 'single', bundle: null, id: 'asa',
+    q: '朝のスッキリ度は？',
+    opts: [['スッキリ', null], ['まあまあ', null], ['重い', null]] },
+  { sec: 'まずは、いまのあなた', kind: 'single', bundle: null, id: 'sleeptype', tate: true,
+    q: 'あなたの眠りは、どのタイプ？',
+    opts: [['いつも同じ時間に眠れる', null], ['リズムが崩れがち', null], ['一瞬で寝落ち（布団に入った記憶で朝）', null], ['なかなか寝付けない', null], ['そもそも睡眠時間が足りない', null]] },
+
+  // ---- リズムのチェック ----
+  { sec: 'リズムのチェック', kind: 'single', bundle: 'rhythm',
+    q: '🍞 朝ごはんは？',
+    opts: [['しっかり', 2], ['軽く', 1], ['なし', 1]] },
+  { sec: 'リズムのチェック', kind: 'single', bundle: 'rhythm',
+    q: '🍱 昼ごはんは？',
+    opts: [['しっかり', 2], ['軽く', 2], ['なし', 1]] },
+  { sec: 'リズムのチェック', kind: 'single', bundle: 'rhythm',
+    q: '🍚 晩ごはんは？',
+    opts: [['しっかり', 1], ['軽く', 2], ['なし', 1]] },
+  { sec: 'リズムのチェック', kind: 'multi', bundle: null,
+    q: '食事で「少ないかも？」と思うのはどれ？', note: 'いくつでも。ない人はそのまま次へ',
+    opts: [['タンパク質', null], ['炭水化物', null], ['脂質', null], ['野菜', null]] },
+  { sec: 'リズムのチェック', kind: 'multi', bundle: null,
+    q: '食事で「多いかも？」と思うのはどれ？', note: 'いくつでも',
+    opts: [['タンパク質', null], ['糖質', null], ['脂質', null], ['野菜', null], ['砂糖類（ジュース類含む）', null]] },
+
+  // ---- 刺激のチェック ----
+  { sec: '刺激のチェック', kind: 'single', bundle: 'stim',
+    q: '🥤 甘い飲み物を飲む？', note: 'コーヒーや紅茶の砂糖も含む',
+    opts: [['ほとんど飲まない', 2], ['時々', 2], ['毎日', 1], ['毎日パック2本以上', 0]] },
+  { sec: '刺激のチェック', kind: 'single', bundle: 'stim',
+    q: '☕ カフェイン、最後の時間は？', note: 'エナジードリンクも含む',
+    opts: [['15時より前', 2], ['15〜18時', 1], ['18時より後', 0], ['飲んでない', 2]] },
+  { sec: '刺激のチェック', kind: 'single', bundle: 'stim',
+    q: '🎮 ゲームや動画、寝るどれくらい前まで？',
+    opts: [['3時間以上前', 2], ['2時間前', 2], ['1時間前', 1], ['寝るまで見てる', 0]] },
+  { sec: '刺激のチェック', kind: 'single', bundle: 'stim',
+    q: '🚶 運動量はどのくらい？',
+    opts: [['しっかり', 2], ['普通', 2], ['通勤のみ', 1], ['してない（室内）', 1]] },
+  { sec: '刺激のチェック', kind: 'single', bundle: null,
+    q: 'あなたの「普通の運動量」って、どれくらい？',
+    opts: [['15分くらい', null], ['30分くらい', null], ['1時間くらい', null], ['2時間以上', null]] },
+
+  // ---- 環境のチェック ----
+  { sec: '環境のチェック', kind: 'single', bundle: 'nest',
+    q: '🛏️ 布団・寝る場所は快適？',
+    opts: [['快適', 2], ['まあまあ', 1], ['落ち着かない', 0]] },
+  { sec: '環境のチェック', kind: 'single', bundle: 'nest',
+    q: '📚 頭の上や枕元に、物がある？',
+    opts: [['すっきりしてる', 2], ['少しある', 1], ['ごちゃっとしてる', 0]] },
+  { sec: '環境のチェック', kind: 'single', bundle: 'nest',
+    q: '📱 寝るときのスマホの場所は？',
+    opts: [['別の部屋・遠く', 2], ['手の届かない所', 1], ['枕元', 0]] },
+  { sec: '環境のチェック', kind: 'single', bundle: 'nest',
+    q: '🕯️ 寝る前に、気をつけてることってある？',
+    opts: [['ある', 2], ['ときどき', 2], ['特にない', 1]] },
+
+  // ---- 最後にひとつ ----
+  { sec: '最後にひとつ', kind: 'text', bundle: null, id: 'kaetai',
+    q: '「これを変えたら、もっと良い朝を迎えられるかも？」と思うものがあったら教えてください',
+    note: '自由に。空欄でも大丈夫' },
+  { sec: '最後にひとつ', kind: 'name', bundle: null, id: 'nickname',
+    q: 'お名前・ニックネーム', note: '任意。じゅんじゅんからひとことコメントが欲しい人だけ' }
+];
+
+const BUNDLE_NAMES = { stim: '刺激', rhythm: 'リズム', nest: '環境' };
+
+const TYPES = {
+  stim: {
+    name: '「刺激が残る夜」タイプ',
+    sub: '体は寝たいのに、頭がまだ昼間にいます。<br>あなたが悪いんじゃなくて、刺激が便利すぎる時代なだけ。',
+    point: '<b>今夜のワンポイント：</b>寝る前に、気になっていることを紙に「ぐちゃぐちゃ書き」してから布団へ。頭の中の火を、紙に移すイメージです。書いたら見返さなくてOK。'
+  },
+  rhythm: {
+    name: '「リズムが揺れる夜」タイプ',
+    sub: '食事の時間が、眠りの時計を少し揺らしているかも。<br>全部直さなくていい。まずひとつだけ。',
+    point: '<b>今夜のワンポイント：</b>明日の朝ごはんの時間だけ、いつもと同じにしてみてください。眠りの時計は、実は朝から巻かれています。'
+  },
+  nest: {
+    name: '「巣が落ち着かない夜」タイプ',
+    sub: '寝る場所が、まだ「安心の巣」になっていないみたい。<br>道具の問題だから、今夜すぐ変えられます。',
+    point: '<b>今夜のワンポイント：</b>頭の上と枕元だけ、すっきりさせてみて。スマホは腕一本ぶん遠くへ。体は「頭の上に何もない」と安心する生き物です。'
+  },
+  good: {
+    name: '「今夜は整ってる」タイプ',
+    sub: '環境はいい状態。このまま、いい夜を。<br>それでも眠りが浅い日があるなら——環境じゃない何かが動いています。',
+    point: '<b>ここからのワンポイント：</b>「環境は整ってるのに眠れない」は、実は一番おもしろいサイン。7日間測ると、環境の外にあるパターン（気圧・心・約束）が見えてきます。'
+  }
+};
+
+// ---- 質問を描画 ----
+const qbox = document.getElementById('qbox');
+let currentSec = '';
+QUESTIONS.forEach((item, i) => {
+  if (item.sec !== currentSec) {
+    currentSec = item.sec;
+    const h = document.createElement('div');
+    h.className = 's-bundle';
+    h.textContent = '― ' + item.sec + ' ―';
+    qbox.appendChild(h);
+  }
+  const card = document.createElement('div');
+  card.className = 's-card';
+  card.dataset.index = i;
+  let inner = '<div class="s-q">' + item.q + '</div>';
+  if (item.note) inner += '<div class="s-note">' + item.note + '</div>';
+  card.innerHTML = inner;
+
+  if (item.kind === 'text') {
+    const ta = document.createElement('textarea');
+    ta.className = 's-free';
+    ta.placeholder = 'たとえば：コーヒーの時間、寝る前のスマホ、晩ごはん…';
+    card.appendChild(ta);
+  } else if (item.kind === 'name') {
+    const inp = document.createElement('input');
+    inp.className = 's-name';
+    inp.type = 'text';
+    inp.placeholder = 'ニックネームでOK';
+    card.appendChild(inp);
+  } else {
+    const opts = document.createElement('div');
+    opts.className = 's-opts' + (item.tate ? ' tate' : '');
+    item.opts.forEach(([label, score]) => {
+      const b = document.createElement('button');
+      b.className = 's-opt';
+      b.textContent = label;
+      b.dataset.score = (score === null ? '' : score);
+      b.addEventListener('click', () => {
+        if (item.kind === 'multi') {
+          b.classList.toggle('on');
+        } else {
+          opts.querySelectorAll('.s-opt').forEach(x => x.classList.remove('on'));
+          b.classList.add('on');
+        }
+      });
+      opts.appendChild(b);
+    });
+    card.appendChild(opts);
+  }
+  qbox.appendChild(card);
+});
+
+// ---- 診断 ----
+function diagnose() {
+  const sums = { stim: 0, rhythm: 0, nest: 0 };
+  const maxes = { stim: 0, rhythm: 0, nest: 0 };
+  const answers = [];
+  const profile = {};
+
+  document.querySelectorAll('.s-card').forEach(card => {
+    const item = QUESTIONS[card.dataset.index];
+    if (item.kind === 'text' || item.kind === 'name') {
+      const v = card.querySelector('textarea, input').value.trim();
+      answers.push(item.q.slice(0, 6) + '…:' + v);
+      if (item.id) profile[item.id] = v;
+      return;
+    }
+    if (item.kind === 'multi') {
+      const sel = [...card.querySelectorAll('.s-opt.on')].map(b => b.textContent);
+      answers.push(sel.join('・'));
+      return;
+    }
+    const sel = card.querySelector('.s-opt.on');
+    answers.push(sel ? sel.textContent : '');
+    if (item.id && sel) profile[item.id] = sel.textContent;
+    if (item.bundle) {
+      const best = Math.max(...item.opts.map(o => o[1]));
+      maxes[item.bundle] += best;
+      sums[item.bundle] += sel && sel.dataset.score !== '' ? parseInt(sel.dataset.score, 10) : 1;
+    }
+  });
+
+  const rates = Object.keys(sums).map(k => ({ k: k, rate: sums[k] / maxes[k] }));
+  rates.sort((a, b) => a.rate - b.rate);
+  const type = (rates[0].rate >= 0.8) ? 'good' : rates[0].k;
+
+  let n = parseInt(localStorage.getItem('shindan_count') || '0', 10) + 1;
+  localStorage.setItem('shindan_count', String(n));
+  document.getElementById('countBadge').textContent =
+    n === 1 ? 'はじめまして、1回目の診断です' : '今日で ' + n + ' 回目の診断です。おかえりなさい';
+
+  const t = TYPES[type];
+  document.getElementById('typeName').textContent = t.name;
+  document.getElementById('typeSub').innerHTML = t.sub;
+  document.getElementById('typePoint').innerHTML = t.point;
+  document.getElementById('profileEcho').textContent =
+    (profile.sleeptype ? 'あなたの眠りタイプ：' + profile.sleeptype : '');
+  const bars = document.getElementById('bars');
+  bars.innerHTML = '';
+  ['rhythm', 'stim', 'nest'].forEach(k => {
+    const pct = Math.round(sums[k] / maxes[k] * 100);
+    bars.innerHTML += '<div class="s-bar">' + BUNDLE_NAMES[k] +
+      '<div class="s-bar-track"><div class="s-bar-fill" style="width:' + pct + '%"></div></div></div>';
+  });
+
+  document.getElementById('quiz').style.display = 'none';
+  document.getElementById('result').classList.add('show');
+  window.scrollTo(0, 0);
+
+  try {
+    fetch('https://script.google.com/macros/s/AKfycbyDgFxz_xBfY3ZWs8LtzcKq3RwwBQvsWHpE26kZ9gCCFqRJ3omhazpJOQvShxG1IVZn_Q/exec', {
+      method: 'POST', mode: 'no-cors',
+      body: JSON.stringify({ kind: 'shindan', type: type, n: n, answers: answers })
+    });
+  } catch (e) {}
+}
+
+function reveal() {
+  document.querySelectorAll(".fade:not(.show)").forEach(el => {
+    if (el.getBoundingClientRect().top < window.innerHeight * 0.92) el.classList.add("show");
+  });
+}
+window.addEventListener("scroll", reveal, { passive: true });
+reveal();
+const toggle = document.querySelector(".nav-toggle");
+if (toggle) toggle.addEventListener("click", () => document.querySelector(".header").classList.toggle("menu-open"));
+</script>
+
+</body>
+</html>
