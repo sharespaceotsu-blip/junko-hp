@@ -147,11 +147,11 @@
     この診断は、<strong>今夜1日の写真</strong>です。<br>
     1回で体は変わらないし、変わらなくていい日もあります。<br>
     気になったとき、また来てください。ちゃんと覚えています。<br><br>
-    本気で自分のパターンを知りたくなった日は——<br>
-    <strong>7日間、測る道具</strong>があります。
+    結果のワーク——読むだけより、体でやると違います。<br>
+    近いうちに、<strong>気掛かりを置いてから眠る練習を、一緒にやる会</strong>（無料・オンライン）を準備しています。
   </p>
-  <a class="p-cta" href="https://line.me/R/oaMessage/%40007rtbeh/?%E7%9D%A1%E7%9C%A0" target="_blank" rel="noopener">LINEで「睡眠」と送って始める</a>
-  <p class="p-cta-note">友だち追加がまだの方は <a href="https://lin.ee/55zaTxn" target="_blank" rel="noopener" style="color:#ab8d5e;">こちら</a> から</p>
+  <a class="p-cta" href="https://line.me/R/oaMessage/%40007rtbeh/?%E3%82%BB%E3%83%9F%E3%83%8A%E3%83%BC" target="_blank" rel="noopener">LINEで「セミナー」と送っておく</a>
+  <p class="p-cta-note">決まったら、最初にご案内します。友だち追加がまだの方は <a href="https://lin.ee/55zaTxn" target="_blank" rel="noopener" style="color:#ab8d5e;">こちら</a> から</p>
 </div>
 
 </main>
@@ -244,6 +244,17 @@ const QUESTIONS = [
     q: '🕯️ 寝る前に、気をつけてることってある？',
     opts: [['ある', 2], ['ときどき', 2], ['特にない', 1]] },
 
+  // ---- 気掛かりのチェック ----
+  { sec: '気掛かりのチェック', kind: 'single', bundle: 'kigakari',
+    q: '🌙 今夜、頭に残ってそうなことってある？',
+    opts: [['特にない', 2], ['少しある', 1], ['いくつもある', 0]] },
+  { sec: '気掛かりのチェック', kind: 'single', bundle: 'kigakari',
+    q: '📝 気掛かりって、書き出したり誰かに話したりする？',
+    opts: [['する', 2], ['ときどき', 1], ['頭の中に置いたまま', 0]] },
+  { sec: '気掛かりのチェック', kind: 'single', bundle: 'kigakari',
+    q: '🛌 布団の中で、明日のことを考えちゃう？',
+    opts: [['あまりない', 2], ['ときどき', 1], ['だいたい考えてる', 0]] },
+
   // ---- 最後にひとつ ----
   { sec: '最後にひとつ', kind: 'text', bundle: null, id: 'kaetai',
     q: '「これを変えたら、もっと良い朝を迎えられるかも？」と思うものがあったら教えてください',
@@ -252,13 +263,24 @@ const QUESTIONS = [
     q: 'お名前・ニックネーム', note: '任意。じゅんじゅんからひとことコメントが欲しい人だけ' }
 ];
 
-const BUNDLE_NAMES = { stim: '刺激', rhythm: 'リズム', nest: '環境' };
+const BUNDLE_NAMES = { stim: '刺激', rhythm: 'リズム', nest: '環境', kigakari: '気掛かり' };
 
 const TYPES = {
   stim: {
     name: '「刺激が残る夜」タイプ',
     sub: '体は寝たいのに、頭がまだ昼間にいます。<br>あなたが悪いんじゃなくて、刺激が便利すぎる時代なだけ。',
-    point: '<b>今夜のワンポイント：</b>寝る前に、気になっていることを紙に「ぐちゃぐちゃ書き」してから布団へ。頭の中の火を、紙に移すイメージです。書いたら見返さなくてOK。'
+    point: '<b>今夜のワンポイント：</b>寝る1時間前、画面をひとつだけ手放してみて。全部やめなくていい、ひとつだけ。刺激は「絶つ」より「減らす」のほうが続きます。'
+  },
+  kigakari: {
+    name: '「一旦置く」が効くタイプ',
+    sub: 'たくさん考えることがあって、脳が疲れてるかも。<br>今日も容量、たくさん使ったね。<br>だから寝る前に、一旦外に出そう。',
+    point: '<b>おすすめ：1分ワーク「手のヨシヨシ体操」</b><br>' +
+      '① 手の緊張を抜いて、やわらかくする<br>' +
+      '② やわらかくなった手で、頭を軽くマッサージ<br>' +
+      '③ 紙に、円をぐるぐる書いてみて。円なら考えなくても書けるから、「書く」への助走になるよ<br>' +
+      'どう？ 何か変わった？<br><br>' +
+      'このあと、今日の気掛かりをノートや紙に書き出すのは、とってもおすすめ。'
+      /* 動画（YouTubeショート）完成後、ここに「やり方を見る(1分)」リンクを追加 */
   },
   rhythm: {
     name: '「リズムが揺れる夜」タイプ',
@@ -273,7 +295,7 @@ const TYPES = {
   good: {
     name: '「今夜は整ってる」タイプ',
     sub: '環境はいい状態。このまま、いい夜を。<br>それでも眠りが浅い日があるなら——環境じゃない何かが動いています。',
-    point: '<b>ここからのワンポイント：</b>「環境は整ってるのに眠れない」は、実は一番おもしろいサイン。7日間測ると、環境の外にあるパターン（気圧・心・約束）が見えてきます。'
+    point: '<b>ここからのワンポイント：</b>「整ってるのに眠れない」は、実は一番おもしろいサイン。環境の外にあるもの——気掛かりや天気——が動いています。そこから先は、測ってみると見えてきます。'
   }
 };
 
@@ -331,8 +353,8 @@ QUESTIONS.forEach((item, i) => {
 
 // ---- 診断 ----
 function diagnose() {
-  const sums = { stim: 0, rhythm: 0, nest: 0 };
-  const maxes = { stim: 0, rhythm: 0, nest: 0 };
+  const sums = { stim: 0, rhythm: 0, nest: 0, kigakari: 0 };
+  const maxes = { stim: 0, rhythm: 0, nest: 0, kigakari: 0 };
   const answers = [];
   const profile = {};
 
@@ -376,7 +398,7 @@ function diagnose() {
     (profile.sleeptype ? 'あなたの眠りタイプ：' + profile.sleeptype : '');
   const bars = document.getElementById('bars');
   bars.innerHTML = '';
-  ['rhythm', 'stim', 'nest'].forEach(k => {
+  ['rhythm', 'stim', 'nest', 'kigakari'].forEach(k => {
     const pct = Math.round(sums[k] / maxes[k] * 100);
     bars.innerHTML += '<div class="s-bar">' + BUNDLE_NAMES[k] +
       '<div class="s-bar-track"><div class="s-bar-fill" style="width:' + pct + '%"></div></div></div>';
