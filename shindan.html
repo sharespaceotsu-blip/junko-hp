@@ -83,6 +83,18 @@
 .s-bar { text-align: center; font-size: 11px; color: #635d51; }
 .s-bar-track { width: 52px; height: 8px; background: #eee8db; border-radius: 99px; margin: 6px auto 0; overflow: hidden; }
 .s-bar-fill { height: 100%; background: linear-gradient(90deg, #c0a273, #ab8d5e); border-radius: 99px; }
+/* PC時はQR、スマホ時はボタン（LINEアプリが無いPCでの取りこぼし防止） */
+.cta-pc { display: none; }
+.cta-qr {
+  width: 190px; height: 190px; margin: 6px auto 0; display: block;
+  background: #fff; padding: 12px; border-radius: 16px;
+  border: 1px solid #e4ddd0; box-shadow: 0 4px 18px rgba(160,145,115,0.12);
+}
+.cta-qr-note { margin-top: 12px; font-size: 13px; color: #635d51; line-height: 1.9; }
+@media (min-width: 768px) {
+  .cta-sp { display: none !important; }
+  .cta-pc { display: block; }
+}
 </style>
 </head>
 <body>
@@ -154,8 +166,12 @@
     一緒に実験してみませんか。<br>
     現在モニター期間のため、<strong>100名様まで無料です。</strong>
   </p>
-  <a class="p-cta" href="https://line.me/R/oaMessage/%40007rtbeh/?%E7%9D%A1%E7%9C%A0" target="_blank" rel="noopener">▶︎ 7日間を始める</a>
-  <p class="p-cta-note">タップするとLINEが開きます。友だち追加がまだの方は <a href="https://lin.ee/55zaTxn" target="_blank" rel="noopener" style="color:#ab8d5e;">こちら</a> から</p>
+  <a class="p-cta cta-sp" href="https://line.me/R/oaMessage/%40007rtbeh/?%E7%9D%A1%E7%9C%A0" target="_blank" rel="noopener">▶︎ 7日間を始める</a>
+  <p class="p-cta-note cta-sp">タップするとLINEが開きます。友だち追加がまだの方は <a href="https://lin.ee/55zaTxn" target="_blank" rel="noopener" style="color:#ab8d5e;">こちら</a> から</p>
+  <div class="cta-pc">
+    <img class="cta-qr" src="images/qr-line.png" alt="LINE友だち追加QRコード" width="190" height="190">
+    <p class="cta-qr-note">スマホでQRコードを読み取って、<br>LINEで「睡眠」と送ってね</p>
+  </div>
 </div>
 
 </main>
