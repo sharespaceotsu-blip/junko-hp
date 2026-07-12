@@ -171,6 +171,17 @@ a { color: inherit; text-decoration: none; }
   font-size: clamp(15px, 1.6vw, 18px);
   color: var(--ink-soft);
   animation: heroIn 1.6s ease 0.5s both;
+  line-height: 2.2;
+}
+/* 副題のメリハリ：主役の言葉は大きく濃く、助詞は小さく */
+.hero-sub-big {
+  font-size: clamp(17px, 1.9vw, 21px);
+  font-weight: 600;
+  color: var(--ink);
+  letter-spacing: 0.12em;
+}
+.hero-sub-joshi {
+  font-size: clamp(13px, 1.3vw, 15px);
 }
 
 /* 署名のような名乗り（控えめに、でも残るように）
