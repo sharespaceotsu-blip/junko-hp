@@ -572,14 +572,6 @@ a { color: inherit; text-decoration: none; }
 .svc-meta svg { color: var(--gold-deep); flex: none; }
 .btn-svc { margin-top: auto; font-size: 12.5px; padding: 12px 28px; white-space: nowrap; }
 
-/* ボタンの下の小さな注意書き */
-.svc-note {
-  margin-top: 10px;
-  font-size: 10.5px;
-  letter-spacing: 0.06em;
-  color: #b0a794;
-}
-
 /* パソコン用：LINEボタンの下のQRコード（スマホでは出ない） */
 .svc-qr {
   margin-top: 14px;
