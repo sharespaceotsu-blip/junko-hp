@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>大津サロンの空き状況｜Junko 50代からのからだ戦略コーチ</title>
+<meta name="description" content="大津サロンの施術のご予約をお受けできる枠を、午前・午後・夕方のカレンダーでご覧いただけます。◯の枠がご予約可能です。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@400;500;700&family=Alex+Brush&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css?v=9">
+<style>
+/* ---- このページ専用：空き状況カレンダー ---- */
+.aki-wrap { max-width: 720px; margin: 0 auto; padding: 8px 24px 40px; }
+.aki-legend { display: flex; justify-content: center; gap: 28px; font-size: 13px; color: var(--ink-soft); margin-bottom: 10px; flex-wrap: wrap; }
+.aki-legend b { color: var(--gold-deep); font-weight: 700; }
+.aki-note { text-align: center; font-size: 12px; color: var(--ink-soft); margin-bottom: 28px; }
+.aki-month { margin-bottom: 36px; }
+.aki-month h2 { font-size: 17px; color: #554431; font-weight: 700; letter-spacing: 0.14em; margin-bottom: 12px; text-align: center; }
+.aki-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 5px; }
+.aki-dow { font-size: 11px; text-align: center; color: var(--ink-soft); padding: 2px 0; letter-spacing: 0; }
+.aki-cell { border: 1px solid var(--line); border-radius: 10px; background: #fff; text-align: center; padding: 5px 2px 7px; letter-spacing: 0; }
+.aki-cell .d { font-size: 11px; color: var(--ink-soft); display: block; margin-bottom: 2px; }
+.aki-slot { display: flex; justify-content: center; align-items: baseline; gap: 4px; font-size: 12px; line-height: 1.7; }
+.aki-slot i { font-style: normal; font-size: 10px; color: var(--ink-soft); }
+.aki-slot b { font-weight: 400; color: #c9c3b6; }
+.aki-slot.free b { font-weight: 700; color: var(--gold-deep); }
+.aki-cell.ok { background: #f6f1e6; border-color: var(--gold); }
+.aki-cell.past { opacity: 0.35; }
+.aki-cell.today { outline: 2px solid var(--gold); outline-offset: -1px; }
+.aki-loading, .aki-error { text-align: center; color: var(--ink-soft); font-size: 14px; padding: 40px 0; }
+.aki-updated { text-align: center; font-size: 11px; color: var(--ink-soft); letter-spacing: 0.08em; }
+.aki-demo-badge { display: block; width: fit-content; margin: 0 auto 20px; font-size: 12px; color: #a15b2e; background: #f8ede2; border: 1px solid #e0c4a6; border-radius: 999px; padding: 2px 16px; }
+@media (max-width: 480px) {
+  .aki-wrap { padding: 4px 10px 32px; }
+  .aki-grid { gap: 3px; }
+  .aki-cell { border-radius: 8px; padding: 3px 1px 5px; }
+  .aki-slot { gap: 2px; font-size: 11px; line-height: 1.6; }
+  .aki-slot i { font-size: 9px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ================================================
+     ▼ ヘッダー（トップページと共通）
+================================================ -->
+<header class="header">
+  <div class="header-inner">
+    <a class="logo" href="index.html">
+      <span class="logo-script">Junko</span>
+      <span class="logo-sub">50代からの<br class="sp-only">からだ戦略コーチ</span>
+    </a>
+    <button class="nav-toggle" aria-label="メニューを開く">
+      <span></span><span></span><span></span>
+    </button>
+    <nav class="nav">
+      <a href="about.html">はじめまして</a>
+      <a href="taisetsu.html">大切にしていること</a>
+      <a href="service.html">サービス</a>
+      <a href="shijutsu.html">施術について</a>
+      <a href="ritsuyou.html">立腰体操</a>
+      <a href="access.html">施術場所</a>
+      <a href="index.html#voice">お客様の声</a>
+    </nav>
+    <a class="btn btn-header" href="service.html">ご予約はこちら</a>
+  </div>
+</header>
+
+<main>
+
+<!-- ================================================
+     ▼ ページの見出し
+================================================ -->
+<section class="page-head">
+  <p class="page-head-en">Calendar</p>
+  <h1 class="page-head-title">大津サロンの空き状況</h1>
+  <p class="page-head-lead">
+    ◯の枠は、施術のご予約をお受けできます。<br>ご希望の日時が決まったら、LINEでお知らせください。
+  </p>
+</section>
+
+<!-- ================================================
+     ▼ 空き状況カレンダー（予定と自動で連動）
+     GAS_URL にGoogle Apps ScriptのURLを入れると動く
+================================================ -->
+<section class="aki-wrap fade">
+  <div class="aki-legend">
+    <span><b>◯</b>　ご予約をお受けできる枠</span>
+    <span>×　ご予約いただけない枠</span>
+  </div>
+  <p class="aki-note">
+    営業時間 10:00〜19:00<br>
+    <span style="white-space: nowrap;">午前 10〜13時</span>／<span style="white-space: nowrap;">午後 13〜16時</span>／<span style="white-space: nowrap;">夕方 16〜19時</span><br>
+    カレンダーは予定と自動で連動しています。
+  </p>
+  <div id="aki-cal">
+    <p class="aki-loading">カレンダーを読み込んでいます…</p>
+  </div>
+</section>
+
+<!-- ================================================
+     ▼ 予約への案内
+================================================ -->
+<section class="flow-end fade">
+  <p>ご希望の枠が決まったら、LINEからご予約ください。</p>
+  <a class="btn btn-gold" href="https://line.me/R/oaMessage/@007rtbeh/?%E5%A4%A7%E6%B4%A5" target="_blank" rel="noopener">LINEで予約する <span class="btn-arrow">›</span></a>
+  <p style="margin-top: 24px;">コース・料金の詳細は、サービスのページをご覧ください。</p>
+  <a class="btn btn-gold" href="service.html">サービス・料金を見る <span class="btn-arrow">›</span></a>
+</section>
+
+<!-- ================================================
+     ▼ LINE相談バー
+================================================ -->
+<section class="line-bar fade">
+  <p>ご不明な点やご相談は、LINEからお気軽にご連絡ください。</p>
+  <a href="https://lin.ee/55zaTxn" target="_blank" rel="noopener">
+    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 11.5a8.5 8.5 0 0 1-8.5 8.5c-1.2 0-2.4-.2-3.4-.7L4 21l1.8-4.4A8.5 8.5 0 1 1 21 11.5z"/></svg>
+    LINEで相談する <span class="btn-arrow">›</span>
+  </a>
+</section>
+
+</main>
+
+<!-- ================================================
+     ▼ フッター（トップページと共通）
+================================================ -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="logo">
+      <span class="logo-script">Junko</span>
+      <span class="logo-sub">50代からのからだ戦略コーチ</span>
+    </div>
+    <nav class="footer-nav">
+      <a href="about.html">はじめまして</a>
+      <a href="taisetsu.html">大切にしていること</a>
+      <a href="service.html">サービス</a>
+      <a href="shijutsu.html">施術について</a>
+      <a href="ritsuyou.html">立腰体操</a>
+      <a href="access.html">施術場所</a>
+      <a href="index.html#voice">お客様の声</a>
+    </nav>
+    <a class="footer-sns" href="https://www.instagram.com/seitaisi_junjun/" target="_blank" rel="noopener" aria-label="Instagram">
+      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1" fill="currentColor" stroke="none"/></svg>
+    </a>
+    <a class="footer-sns" href="https://www.facebook.com/junkoito.otsu" target="_blank" rel="noopener" aria-label="Facebook">
+      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"/><path d="M15.2 7.6h-1.5c-1.1 0-1.9.8-1.9 1.9v2.1H9.9v2.5h1.9V20h2.6v-5.9h1.9l.4-2.5h-2.3V9.8c0-.3.2-.5.5-.5h1.8z" fill="currentColor" stroke="none"/></svg>
+    </a>
+  </div>
+  <p class="footer-copy">© Junko – Body Strategy Coach</p>
+</footer>
+
+<script>
+// スクロールすると、ふわっと現れる動き（控えめ）
+function reveal() {
+  document.querySelectorAll(".fade:not(.show)").forEach(el => {
+    if (el.getBoundingClientRect().top < window.innerHeight * 0.92) el.classList.add("show");
+  });
+}
+window.addEventListener("scroll", reveal, { passive: true });
+window.addEventListener("resize", reveal);
+reveal();
+
+// スマホ用メニューの開け閉め
+const toggle = document.querySelector(".nav-toggle");
+if (toggle) toggle.addEventListener("click", () => document.querySelector(".header").classList.toggle("menu-open"));
+document.querySelectorAll(".nav a").forEach(a => a.addEventListener("click", () => document.querySelector(".header").classList.remove("menu-open")));
+
+// ================================================
+// 空き状況カレンダー（午前・午後・夕方の3枠）
+// GAS_URL：Google Apps Script（予定マップ）のウェブアプリURL
+// 空のままだと「準備中」表示。?demo=1 を付けるとサンプル表示
+// ================================================
+const GAS_URL = "https://script.google.com/macros/s/AKfycbyKsJbTDZE1s9LK4QVKCcaDSTFSXCxExi0yhDOrPAWhl4z6x0h5poFc5Vm4w-VPWayoGQ/exec";
+const SLOTS = [
+  { key: "am", label: "午前" },
+  { key: "pm", label: "午後" },
+  { key: "eve", label: "夕方" }
+];
+
+(function () {
+  const box = document.getElementById("aki-cal");
+  const dows = ["日", "月", "火", "水", "木", "金", "土"];
+  const isDemo = location.search.indexOf("demo=1") >= 0;
+
+  function pad2(n) { return (n < 10 ? "0" : "") + n; }
+  function keyOf(d) { return d.getFullYear() + "-" + pad2(d.getMonth() + 1) + "-" + pad2(d.getDate()); }
+
+  function render(data) {
+    const busy = data.busy || {};
+    const start = new Date(data.start + "T00:00:00");
+    const todayKey = keyOf(new Date());
+    let html = "";
+    if (isDemo) html += '<span class="aki-demo-badge">サンプル表示（本物の予定ではありません）</span>';
+    for (let m = 0; m < data.months; m++) {
+      const first = new Date(start.getFullYear(), start.getMonth() + m, 1);
+      const last = new Date(first.getFullYear(), first.getMonth() + 1, 0).getDate();
+      html += '<div class="aki-month"><h2>' + first.getFullYear() + "年" + (first.getMonth() + 1) + '月</h2><div class="aki-grid">';
+      for (let w = 0; w < 7; w++) html += '<div class="aki-dow">' + dows[w] + "</div>";
+      for (let p = 0; p < first.getDay(); p++) html += "<div></div>";
+      for (let day = 1; day <= last; day++) {
+        const d = new Date(first.getFullYear(), first.getMonth(), day);
+        const k = keyOf(d);
+        const busySlots = busy[k] || [];
+        const allFree = busySlots.length === 0;
+        const cls = "aki-cell" + (allFree ? " ok" : "") + (k < todayKey ? " past" : "") + (k === todayKey ? " today" : "");
+        let slotsHtml = "";
+        SLOTS.forEach(s => {
+          const free = busySlots.indexOf(s.key) < 0;
+          slotsHtml += '<span class="aki-slot' + (free ? " free" : "") + '"><i>' + s.label + "</i><b>" + (free ? "◯" : "×") + "</b></span>";
+        });
+        html += '<div class="' + cls + '"><span class="d">' + day + "</span>" + slotsHtml + "</div>";
+      }
+      html += "</div></div>";
+    }
+    if (data.updated) html += '<p class="aki-updated">' + data.updated + " 時点の空き状況です</p>";
+    box.innerHTML = html;
+  }
+
+  function demoData() {
+    const now = new Date();
+    const start = new Date(now.getFullYear(), now.getMonth(), 1);
+    const busy = {};
+    for (let m = 0; m < 3; m++) {
+      const first = new Date(start.getFullYear(), start.getMonth() + m, 1);
+      const last = new Date(first.getFullYear(), first.getMonth() + 1, 0).getDate();
+      for (let day = 1; day <= last; day++) {
+        let arr = [];
+        SLOTS.forEach((s, si) => {
+          if ((day * 5 + m * 3 + si * 4) % 7 < 3) arr.push(s.key);
+        });
+        if (arr.length >= 2) arr = SLOTS.map(s => s.key);
+        if (arr.length) busy[keyOf(new Date(first.getFullYear(), first.getMonth(), day))] = arr;
+      }
+    }
+    return { start: keyOf(start), months: 3, busy: busy, updated: "" };
+  }
+
+  if (isDemo) { render(demoData()); return; }
+  if (!GAS_URL) {
+    box.innerHTML = '<p class="aki-loading">空き状況カレンダーは、ただいま準備中です。<br>ご予約・お問い合わせはLINEからどうぞ。</p>';
+    return;
+  }
+  fetch(GAS_URL)
+    .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
+    .then(render)
+    .catch(() => {
+      box.innerHTML = '<p class="aki-error">うまく読み込めませんでした。<br>時間をおいて、もう一度お試しください。</p>';
+    });
+})();
+</script>
+
+</body>
+</html>
