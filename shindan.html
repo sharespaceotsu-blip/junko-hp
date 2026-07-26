@@ -173,6 +173,7 @@
 <div class="s-result p-wrap" id="result">
   <span class="s-count" id="countBadge"></span>
   <div class="s-type">
+    <p id="greet" style="display:none; margin-bottom:6px; font-weight:600;"></p>
     <h2 id="typeName"></h2>
     <p class="s-sub" id="typeSub"></p>
     <div class="s-bars" id="bars"></div>
@@ -248,9 +249,9 @@ const QUESTIONS = [
   { sec: 'まずは、いまのあなた', kind: 'single', bundle: null, id: 'asa',
     q: '朝のスッキリ度は？',
     opts: [['スッキリ', null], ['まあまあ', null], ['重い', null]] },
-  { sec: 'まずは、いまのあなた', kind: 'single', bundle: null, id: 'sleeptype', tate: true,
-    q: 'あなたの眠りは、どのタイプ？',
-    opts: [['いつも同じ時間に眠れる', null], ['リズムが崩れがち', null], ['一瞬で寝落ち（布団に入った記憶で朝）', null], ['なかなか寝付けない', null], ['そもそも睡眠時間が足りない', null]] },
+  { sec: 'まずは、いまのあなた', kind: 'multi', bundle: null, id: 'sleeptype', tate: true,
+    q: 'あなたの眠りは、どのタイプ？', note: 'あてはまるもの、いくつでも',
+    opts: [['朝までぐっすり', null], ['いつも同じ時間に眠れる', null], ['リズムが崩れがち', null], ['一瞬で寝落ち（布団に入った記憶で朝）', null], ['なかなか寝付けない', null], ['そもそも睡眠時間が足りない', null]] },
 
   // ---- リズムのチェック ----
   { sec: 'リズムのチェック', kind: 'single', bundle: 'rhythm',
@@ -297,8 +298,8 @@ const QUESTIONS = [
     q: '📱 寝るときのスマホの場所は？',
     opts: [['別の部屋・遠く', 2], ['手の届かない所', 1], ['枕元', 0]] },
   { sec: '環境のチェック', kind: 'single', bundle: 'nest',
-    q: '🕯️ 寝る前に、気をつけてることってある？',
-    opts: [['ある', 2], ['ときどき', 2], ['特にない', 1]] },
+    q: '🕯️ 寝る前に何かセルフケアしてる？', note: 'ストレッチやマッサージ、瞑想など',
+    opts: [['してる', 2], ['ときどき', 2], ['特にしてない', 1]] },
 
   // ---- 気掛かりのチェック ----
   { sec: '気掛かりのチェック', kind: 'single', bundle: 'kigakari',
@@ -325,7 +326,7 @@ const QUESTIONS = [
     q: '「これを変えたら、もっと良い朝を迎えられるかも？」と思うものがあったら教えてください',
     note: '自由に。空欄でも大丈夫' },
   { sec: '最後にひとつ', kind: 'name', bundle: null, id: 'nickname',
-    q: 'お名前・ニックネーム', note: '任意。じゅんじゅんからひとことコメントが欲しい人だけ' }
+    q: 'お名前・ニックネーム', note: '任意。診断ページに利用します。' }
 ];
 
 const BUNDLE_NAMES = { stim: '刺激', rhythm: 'リズム', nest: '環境', kigakari: '気掛かり' };
@@ -466,6 +467,7 @@ function diagnose() {
     if (item.kind === 'multi') {
       const sel = [...card.querySelectorAll('.s-opt.on')].map(b => b.textContent);
       answers.push(sel.join('・'));
+      if (item.id && sel.length) profile[item.id] = sel.join('・');
       return;
     }
     const sel = card.querySelector('.s-opt.on');
@@ -488,6 +490,13 @@ function diagnose() {
     n === 1 ? 'はじめまして、1回目の診断です' : '今日で ' + n + ' 回目の診断です。おかえりなさい';
 
   const t = TYPES[type];
+  const greet = document.getElementById('greet');
+  if (profile.nickname) {
+    greet.textContent = profile.nickname + 'さんへ';
+    greet.style.display = 'block';
+  } else {
+    greet.style.display = 'none';
+  }
   document.getElementById('typeName').textContent = t.name;
   document.getElementById('typeSub').innerHTML = t.sub;
   document.getElementById('typePoint').innerHTML = t.point;
@@ -508,7 +517,8 @@ function diagnose() {
   try {
     fetch('https://script.google.com/macros/s/AKfycbyDgFxz_xBfY3ZWs8LtzcKq3RwwBQvsWHpE26kZ9gCCFqRJ3omhazpJOQvShxG1IVZn_Q/exec', {
       method: 'POST', mode: 'no-cors',
-      body: JSON.stringify({ kind: 'shindan', type: type, n: n, answers: answers })
+      body: JSON.stringify({ kind: 'shindan', type: type, n: n, answers: answers,
+        u: new URLSearchParams(location.search).get('u') || '' })
     });
   } catch (e) {}
 }
