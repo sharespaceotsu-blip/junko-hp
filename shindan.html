@@ -3,13 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>明日の元気のための睡眠チェック診断｜Junko 50代からのからだ戦略コーチ</title>
-<meta name="description" content="登録なし・3分・その場で結果。今夜のあなたの眠りの環境を、そっと診断します。">
+<title>明日の元気のための体のリズムと環境チェック｜Junko 50代からのからだ戦略コーチ</title>
+<meta name="description" content="登録なし・3分・その場で結果。あなたの毎日のリズムと環境を、そっとチェックします。">
 <meta name="robots" content="noindex">
 <!-- SNSシェア用（noindexでもプレビューは表示される） -->
 <meta property="og:type" content="website">
-<meta property="og:title" content="明日の元気のための睡眠チェック診断｜Junko">
-<meta property="og:description" content="登録なし・3分・その場で結果。今夜の眠りから、明日の元気へ。あなたはどのタイプ？">
+<meta property="og:title" content="明日の元気のための体のリズムと環境チェック｜Junko">
+<meta property="og:description" content="体のリズムと環境から、明日の元気へ。あなたはどのタイプ？　登録なし・3分・その場で結果。">
 <meta property="og:image" content="https://junkobody.com/images/hero.jpg">
 <meta property="og:url" content="https://junkobody.com/shindan.html">
 <meta name="twitter:card" content="summary_large_image">
@@ -146,10 +146,11 @@
 
 <section class="page-head">
   <p class="page-head-en">Check</p>
-  <h1 class="page-head-title">明日の元気のための<br class="sp-only">睡眠チェック診断</h1>
+  <h1 class="page-head-title">明日の元気のための<br class="sp-only">体のリズムと環境チェック</h1>
   <p class="page-head-lead">
     登録なし・3分・その場で結果。<br>
-    正直に答えるほど、当たります。
+    正直に答えるほど、<br class="sp-only">今のあなたが見えてきます。<br><br>
+    <strong>何が今のあなたを作ってる？</strong>
   </p>
 </section>
 
@@ -182,12 +183,13 @@
     <strong>やりたいことに、体がついてくる。</strong><br>
     なんとなく不調から、なんとなく調子いい毎日へ。<br><br>
     今回の診断にご参加いただいた方へ。<br>
-    7日間だけ、ご自身の睡眠を見つめる小さな実験をご用意しました。<br><br>
-    <strong>「7日間の睡眠記録アプリ」</strong><br>
-    毎晩1〜2分。記録するだけで、眠りのクセが見えてきます。<br>
+    7日間だけ、「朝のスッキリ」を作りにいく小さな実験をご用意しました。<br><br>
+    <strong>「朝のスッキリを作る、7日間のリズムチェックアプリ」</strong><br>
+    毎晩1〜2分。記録するだけで、あなたの朝を作っているものが見えてきます。<br>
     7日後には、あなただけの簡単なレポートをお届けします。<br><br>
     一緒に実験してみませんか。<br>
-    現在モニター期間のため、<strong>100名様まで無料です。</strong>
+    現在モニター期間のため、<strong>先着20名様まで無料です。</strong><br>
+    <span style="font-size:.9em;">（一緒に内容を育ててくれる実験仲間の枠です。21人目からは 1,000円になります）</span>
   </p>
   <a class="p-cta cta-sp" href="https://line.me/R/oaMessage/%40007rtbeh/?%E7%9D%A1%E7%9C%A0" target="_blank" rel="noopener">▶︎ 7日間を始める</a>
   <p class="p-cta-note cta-sp">タップするとLINEが開きます。友だち追加がまだの方は <a href="https://lin.ee/55zaTxn" target="_blank" rel="noopener" style="color:#ab8d5e;">こちら</a> から</p>
@@ -309,6 +311,15 @@ const QUESTIONS = [
     q: '🛌 布団の中で、明日のことを考えちゃう？',
     opts: [['あまりない', 2], ['ときどき', 1], ['だいたい考えてる', 0]] },
 
+  // ---- 体のチェック（採点なし・記録だけ） ----
+  { sec: '体のチェック', kind: 'multi', bundle: null,
+    q: '🧍 どこか固まってるなぁ、痛いなぁってところある？', note: 'いくつでも。ない人はそのまま次へ',
+    opts: [['顎', null], ['顔', null], ['目', null], ['鼻', null], ['首', null], ['肩', null], ['背中', null], ['腰', null], ['脚', null], ['足', null], ['胃のあたり', null], ['お腹', null], ['その他', null]] },
+  { sec: '体のチェック', kind: 'text', bundle: null, id: 'karada_memo',
+    q: '気になるところあったら、書いてね',
+    note: '自由に。空欄でも大丈夫',
+    ph: 'たとえば：朝起きると首が張ってる、夕方は腰が重い…' },
+
   // ---- 最後にひとつ ----
   { sec: '最後にひとつ', kind: 'text', bundle: null, id: 'kaetai',
     q: '「これを変えたら、もっと良い朝を迎えられるかも？」と思うものがあったら教えてください',
@@ -406,7 +417,7 @@ QUESTIONS.forEach((item, i) => {
   if (item.kind === 'text') {
     const ta = document.createElement('textarea');
     ta.className = 's-free';
-    ta.placeholder = 'たとえば：コーヒーの時間、寝る前のスマホ、晩ごはん…';
+    ta.placeholder = item.ph || 'たとえば：コーヒーの時間、寝る前のスマホ、晩ごはん…';
     card.appendChild(ta);
   } else if (item.kind === 'name') {
     const inp = document.createElement('input');
