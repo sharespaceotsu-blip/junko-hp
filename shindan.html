@@ -180,6 +180,19 @@
     <div class="s-point" id="typePoint"></div>
     <p class="s-profile" id="profileEcho"></p>
   </div>
+  <div class="s-type" id="hodokeru" style="display:none">
+    <p id="hodokeruParts" style="font-weight:600; margin-bottom:6px;"></p>
+    <h2>「ほどける」が効くタイプ</h2>
+    <p class="s-sub">1日お疲れ様。<br>体が固くなりやすいお年頃⭐️<br>そんな時は、サクッと「ほどける」を1日に何回もやるのがおすすめだよ。</p>
+    <div class="s-point">
+      <b>1分ワーク「鎖骨トントン」</b><br>
+      ① 鎖骨の内側（顎のすぐ下）のクリっとしたところ（クリちゃんって呼ぶよ）を、反対の手の中指でトントン優しく叩くよ<br>
+      ② 魔法の呪文は「クリちゃんクリックドットコム」<br>
+      ③ 目を閉じて、響きを感じてみて<br>
+      どう？ スーッと力が抜けた？<br><br>
+      試してみて。休憩時間、1日の終わりにぴったりだね。
+    </div>
+  </div>
   <p class="s-close">
     <strong>やりたいことに、体がついてくる。</strong><br>
     なんとなく不調から、なんとなく調子いい毎日へ。<br><br>
@@ -313,7 +326,7 @@ const QUESTIONS = [
     opts: [['あまりない', 2], ['ときどき', 1], ['だいたい考えてる', 0]] },
 
   // ---- 体のチェック（採点なし・記録だけ） ----
-  { sec: '体のチェック', kind: 'multi', bundle: null,
+  { sec: '体のチェック', kind: 'multi', bundle: null, id: 'karada',
     q: '🧍 どこか固まってるなぁ、痛いなぁってところある？', note: 'いくつでも。ない人はそのまま次へ',
     opts: [['顎', null], ['顔', null], ['目', null], ['鼻', null], ['首', null], ['肩', null], ['背中', null], ['腰', null], ['脚', null], ['足', null], ['胃のあたり', null], ['お腹', null], ['その他', null]] },
   { sec: '体のチェック', kind: 'text', bundle: null, id: 'karada_memo',
@@ -502,6 +515,13 @@ function diagnose() {
   document.getElementById('typePoint').innerHTML = t.point;
   document.getElementById('profileEcho').textContent =
     (profile.sleeptype ? 'あなたの眠りタイプ：' + profile.sleeptype : '');
+  const hod = document.getElementById('hodokeru');
+  if (profile.karada) {
+    document.getElementById('hodokeruParts').textContent = '🧍 ' + profile.karada + ' にチェックしたあなたへ';
+    hod.style.display = 'block';
+  } else {
+    hod.style.display = 'none';
+  }
   const bars = document.getElementById('bars');
   bars.innerHTML = '';
   ['rhythm', 'stim', 'nest', 'kigakari'].forEach(k => {
