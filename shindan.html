@@ -119,6 +119,16 @@
 .s-share-btn.fb { background: #1877f2; }
 .s-share-btn.line { background: #06c755; }
 </style>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-L6PP7M3EVH"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-L6PP7M3EVH');
+</script>
+
 </head>
 <body>
 
@@ -198,17 +208,18 @@
     なんとなく不調から、なんとなく調子いい毎日へ。<br><br>
     今回のチェックにご参加いただいた方へ。<br>
     「朝のスッキリ」を作りにいく小さな実験をご用意しました。<br><br>
-    <strong>「からだリズム実験（14日間）」</strong><br>
+    <strong>「からだリズム実験」</strong><br>
     1週間で見つけて、もう1週間で確かめる。<br><br>
-    前半の7日間は、毎晩1〜2分、記録するだけ。<br>
-    あなたの朝を作っているものが見えてきます。<br>
-    後半の7日間は、見えてきたことから1個だけ変えて、確かめてみる。<br>
-    14日後には、あなただけの「わたしのリズムレポート」をお届けします。<br><br>
+    まずは今夜から、気楽に7日間。<br>
+    毎晩1〜2分の記録で、あなたの朝を作っているものが見えてきます。<br>
+    7日のあとには「気付きメモ」をお届け。<br>
+    続けたくなったら、そのまま後半の7日へ——1個だけ変えて、確かめる週。<br>
+    14日つづけた方には、あなただけの<strong>「わたしのリズムレポート」</strong>が届きます。<br><br>
     一緒に実験してみませんか。<br>
     現在モニター期間のため、<strong>先着20名様まで無料です。</strong><br>
     <span style="font-size:.9em;">（一緒に内容を育ててくれる実験仲間の枠です。21人目からは 2,000円になります）</span>
   </p>
-  <a class="p-cta cta-sp" href="https://line.me/R/oaMessage/%40007rtbeh/?%E7%9D%A1%E7%9C%A0" target="_blank" rel="noopener">▶︎ 14日間の実験を始める</a>
+  <a class="p-cta cta-sp" href="https://line.me/R/oaMessage/%40007rtbeh/?%E7%9D%A1%E7%9C%A0" target="_blank" rel="noopener">▶︎ 今夜から始める</a>
   <p class="p-cta-note cta-sp">タップするとLINEが開きます。友だち追加がまだの方は <a href="https://lin.ee/55zaTxn" target="_blank" rel="noopener" style="color:#ab8d5e;">こちら</a> から</p>
   <div class="cta-pc">
     <img class="cta-qr" src="images/qr-line.png" alt="LINE友だち追加QRコード" width="190" height="190">
@@ -555,6 +566,15 @@ window.addEventListener("scroll", reveal, { passive: true });
 reveal();
 const toggle = document.querySelector(".nav-toggle");
 if (toggle) toggle.addEventListener("click", () => document.querySelector(".header").classList.toggle("menu-open"));
+
+// このページを開いた記録（開いた人と送信した人の差＝離脱を見るため。診断アクセスタブに1行）
+try {
+  fetch('https://script.google.com/macros/s/AKfycbyDgFxz_xBfY3ZWs8LtzcKq3RwwBQvsWHpE26kZ9gCCFqRJ3omhazpJOQvShxG1IVZn_Q/exec', {
+    method: 'POST', mode: 'no-cors',
+    body: JSON.stringify({ kind: 'shindan_open',
+      u: new URLSearchParams(location.search).get('u') || '' })
+  });
+} catch (e) {}
 </script>
 
 </body>
