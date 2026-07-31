@@ -1,0 +1,126 @@
+/* ================================================
+   表紙B案：横長の写真を全面に敷いて、左の余白に言葉を置く
+   ・本番の style.css には一切さわっていません
+   ・使うのは index-b.html だけ
+   ・写真は images/hero-b.jpg（右に人・左が明るく空いている横長）
+================================================ */
+
+.heroB {
+  position: relative;
+  min-height: 84vh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  background: var(--bg);
+}
+
+/* ---- 写真（背面いっぱい） ---- */
+.heroB-photo {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+.heroB-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 72% 50%;   /* 人が切れないように右寄りで表示 */
+}
+/* 左端だけほんの少し白をのせて、文字を読みやすく（写真はほぼそのまま） */
+.heroB-photo::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(95deg,
+    rgba(253, 252, 250, 0.86) 0%,
+    rgba(253, 252, 250, 0.55) 30%,
+    rgba(253, 252, 250, 0) 52%);
+}
+
+/* ---- 言葉（左） ---- */
+.heroB-inner {
+  position: relative;
+  z-index: 1;
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 60px 48px 120px;
+}
+.heroB-words {
+  max-width: 640px;   /* 「体がついてくる人生を。」が1行で収まる幅 */
+}
+.heroB-copy {
+  font-size: clamp(26px, 3.9vw, 44px);
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  line-height: 1.9;
+  animation: heroIn 1.6s ease both;
+}
+.heroB-sub {
+  margin-top: 38px;
+  font-size: clamp(15px, 1.6vw, 18px);
+  color: var(--ink-soft);
+  line-height: 2.2;
+  animation: heroIn 1.6s ease 0.5s both;
+}
+.heroB-sub-big {
+  font-size: clamp(17px, 1.9vw, 21px);
+  font-weight: 600;
+  color: var(--ink);
+  letter-spacing: 0.12em;
+}
+.heroB-sub-joshi {
+  font-size: clamp(13px, 1.3vw, 15px);
+}
+.heroB-name {
+  margin-top: 44px;
+  font-size: 14.5px;
+  letter-spacing: 0.18em;
+  line-height: 2.1;
+  color: var(--ink);
+  padding-left: 44px;
+  text-indent: -44px;
+  animation: heroIn 1.6s ease 1s both;
+}
+.heroB-name::before {
+  content: "";
+  display: inline-block;
+  width: 30px;
+  height: 1px;
+  background: var(--gold);
+  margin-right: 14px;
+  vertical-align: middle;
+}
+
+/* ---- スマホ：言葉が先、写真は下に横長のまま ---- */
+@media (max-width: 820px) {
+  .heroB {
+    flex-direction: column;
+    align-items: stretch;
+    min-height: 0;
+  }
+  .heroB-photo {
+    position: relative;
+    inset: auto;
+    order: 2;
+  }
+  .heroB-inner { order: 1; }
+  .heroB-photo img {
+    height: auto;
+    aspect-ratio: 16 / 10;
+    object-position: 78% 50%;
+  }
+  .heroB-photo::after { display: none; }   /* スマホでは写真をそのまま見せる */
+  .heroB-inner {
+    padding: 40px 24px 34px;
+  }
+  .heroB-words { max-width: none; }
+  /* 「はじめまして」は写真に重ねず、下にそのまま置く */
+  .heroB .hero-scroll {
+    position: static;
+    transform: none;
+    order: 3;
+    margin: 20px auto 28px;
+  }
+  .heroB-name { font-size: 13.5px; letter-spacing: 0.12em; line-height: 2.1; }
+}
