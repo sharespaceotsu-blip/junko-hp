@@ -79,16 +79,16 @@ a { color: inherit; text-decoration: none; }
   align-items: center;
   gap: 32px;
 }
-.logo { display: flex; flex-direction: column; line-height: 1.4; }
+.logo { display: flex; flex-direction: column; line-height: 1.4; flex-shrink: 0; }
 .logo-script {
   font-family: "Alex Brush", cursive;
   font-size: 34px;
   letter-spacing: 0.04em;
 }
-.logo-sub { font-size: 10.5px; letter-spacing: 0.14em; color: var(--ink-soft); }
+.logo-sub { font-size: 10.5px; letter-spacing: 0.14em; color: var(--ink-soft); white-space: nowrap; }
 
-.nav { margin-left: auto; display: flex; gap: 30px; }
-.nav a { font-size: 13px; color: var(--ink-soft); transition: color 0.3s; }
+.nav { margin-left: auto; display: flex; gap: 30px; flex-shrink: 0; }
+.nav a { font-size: 13px; color: var(--ink-soft); transition: color 0.3s; white-space: nowrap; }
 .nav a:hover { color: var(--ink); }
 
 /* スマホ用メニューボタン（三本線）。パソコンでは出ない */
@@ -693,11 +693,13 @@ a { color: inherit; text-decoration: none; }
   letter-spacing: 0.2em;
 }
 .about-role {
-  margin-top: 10px;
-  font-size: 13px;
+  margin-top: 6px;
+  font-size: 14.5px;
+  font-weight: 700;
   letter-spacing: 0.14em;
   color: var(--gold-deep);
 }
+.about-role + .about-role { margin-top: 2px; }
 .about-lead {
   margin-top: 24px;
   font-size: 15px;
