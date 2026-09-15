@@ -331,11 +331,16 @@ const QUESTIONS = [
     opts: [['あまりない', 2], ['ときどき', 1], ['だいたい考えてる', 0]] },
 
   // ---- 体のチェック（採点なし・記録だけ） ----
+  // 2026-09-15追加：眠ってる時と朝の状態。部位のチェック（karada）は今までどおり残す＝過去のデータと混ざらない
+  { sec: '体のチェック', kind: 'multi', bundle: null, id: 'nemuri', tate: true,
+    q: '🧍 眠ってる時や朝の状態を教えて', note: 'いくつでも。ない人はそのまま次へ',
+    opts: [['体のどこかに痛みがある', null], ['肘を曲げて寝ている', null], ['食いしばりがある', null], ['朝は鼻がぐずぐずしている', null], ['手に強張りを感じる朝がある', null], ['足や脚がよく攣る', null], ['首や首の下が凝ってる', null], ['腰が重く感じる', null], ['朝起きる時によっこらしょってなってる', null], ['その他（このあと書いてね）', null]] },
   { sec: '体のチェック', kind: 'multi', bundle: null, id: 'karada',
     q: '🧍 どこか固まってるなぁ、痛いなぁってところある？', note: 'いくつでも。ない人はそのまま次へ',
     opts: [['顎', null], ['顔', null], ['目', null], ['鼻', null], ['首', null], ['肩', null], ['背中', null], ['腰', null], ['脚', null], ['足', null], ['胃のあたり', null], ['お腹', null], ['その他', null]] },
   { sec: '体のチェック', kind: 'text', bundle: null, id: 'karada_memo',
-    q: '気になるところあったら、書いてね',
+    key: '気になるとこ',
+    q: '体で気になるところがあったら書いてね',
     note: '自由に。空欄でも大丈夫',
     ph: 'たとえば：朝起きると首が張ってる、夕方は腰が重い…' },
 
@@ -344,7 +349,9 @@ const QUESTIONS = [
     q: '「これを変えたら、もっと良い朝を迎えられるかも？」と思うものがあったら教えてください',
     note: '自由に。空欄でも大丈夫' },
   { sec: '最後にひとつ', kind: 'name', bundle: null, id: 'nickname',
-    q: 'お名前・ニックネーム', note: '任意。診断ページに利用します。' }
+    key: 'お名前・ニッ',
+    q: 'LINEの登録名またはニックネーム',
+    note: 'LINEの登録名を記入いただくと、7日間チェックを利用する場合に便利です' }
 ];
 
 const BUNDLE_NAMES = { stim: '刺激', rhythm: 'リズム', nest: '環境', kigakari: '気掛かり' };
@@ -442,7 +449,7 @@ QUESTIONS.forEach((item, i) => {
     const inp = document.createElement('input');
     inp.className = 's-name';
     inp.type = 'text';
-    inp.placeholder = 'ニックネームでOK';
+    inp.placeholder = 'LINEの登録名かニックネーム';
     card.appendChild(inp);
   } else {
     const opts = document.createElement('div');
@@ -478,7 +485,9 @@ function diagnose() {
     const item = QUESTIONS[card.dataset.index];
     if (item.kind === 'text' || item.kind === 'name') {
       const v = card.querySelector('textarea, input').value.trim();
-      answers.push(item.q.slice(0, 6) + '…:' + v);
+      // GAS側の一報は「質問文の先頭6文字」で答えを拾う。表示文を変えても通知が壊れないよう、
+      // 変えた質問には key を持たせて送る合図だけ固定する（key がなければ従来どおり先頭6文字）
+      answers.push((item.key || item.q.slice(0, 6)) + '…:' + v);
       if (item.id) profile[item.id] = v;
       return;
     }
