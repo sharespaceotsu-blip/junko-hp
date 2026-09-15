@@ -63,9 +63,17 @@
   text-align: center; font-size: 13px; font-weight: 700;
   color: #ab8d5e; letter-spacing: 0.2em; margin: 34px 0 14px;
 }
-.s-disclaimer {
-  max-width: 520px; margin: 18px auto 0; text-align: center;
-  font-size: 10.5px; color: #a39c8e; line-height: 1.8;
+.s-caution {
+  max-width: 520px; margin: 22px auto 0;
+  background: #fffdf9; border: 1px solid #e4ddd0; border-radius: 12px;
+  padding: 14px 18px 15px;
+}
+.s-caution-title {
+  font-size: 12px; font-weight: 700; color: #ab8d5e; letter-spacing: 0.1em;
+}
+.s-caution ul { margin: 8px 0 0; padding-left: 1.1em; }
+.s-caution li {
+  font-size: 11.5px; color: #635d51; line-height: 1.9; margin-top: 4px;
 }
 .s-result { display: none; max-width: 560px; margin: 0 auto; text-align: center; }
 .s-result.show { display: block; }
@@ -138,17 +146,6 @@
       <span class="logo-script">Junko</span>
       <span class="logo-sub">50代からの<br class="sp-only">からだ戦略</span>
     </a>
-    <button class="nav-toggle" aria-label="メニューを開く"><span></span><span></span><span></span></button>
-    <nav class="nav">
-      <a href="about.html">はじめまして</a>
-      <a href="taisetsu.html">大切にしていること</a>
-      <a href="service.html">サービス</a>
-      <a href="shijutsu.html">施術について</a>
-      <a href="ritsuyou.html">立腰体操</a>
-      <a href="access.html">施術場所</a>
-      <a href="index.html#voice">お客様の声</a>
-    </nav>
-    <a class="btn btn-header" href="service.html">ご予約はこちら</a>
   </div>
 </header>
 
@@ -169,10 +166,15 @@
        文言の精査は QUESTIONS を書き換えるだけでOK -->
   <div id="qbox"></div>
 
-  <p class="s-disclaimer">
-    ＊これは習慣をチェックする目的のもので、医療目的ではありません。<br>
-    あくまでご自身の気づきとしてご利用ください。
-  </p>
+  <div class="s-caution">
+    <p class="s-caution-title">大事な注意</p>
+    <ul>
+      <li>このチェックは医学的な診断ではなく、「気づきの目安」のためのものです</li>
+      <li>症状が強い時・続く時・いつもと違う時は、自己判断せず医療機関へ</li>
+      <li>通院中・服薬中の方は、治療を最優先に。気づきは、ご自身の理解のためのものとしてください</li>
+      <li>めまい、動悸、強い頭痛などが急に来た時は、迷わず受診を</li>
+    </ul>
+  </div>
 
   <div style="text-align:center; margin-top: 26px;">
     <button class="p-cta" style="border:none; cursor:pointer; font-family:inherit;" onclick="diagnose()">診断する</button>
@@ -209,12 +211,10 @@
     今回のチェックにご参加いただいた方へ。<br>
     「朝のスッキリ」を作りにいく小さな実験をご用意しました。<br><br>
     <strong>「からだリズム実験」</strong><br>
-    1週間で見つけて、もう1週間で確かめる。<br><br>
+    1週間の記録で、朝のじぶんを見つける。<br><br>
     まずは今夜から、気楽に7日間。<br>
     毎晩1〜2分の記録で、あなたの朝を作っているものが見えてきます。<br>
-    7日のあとには「気付きメモ」をお届け。<br>
-    続けたくなったら、そのまま後半の7日へ——1個だけ変えて、確かめる週。<br>
-    14日つづけた方には、あなただけの<strong>「わたしのリズムレポート」</strong>が届きます。<br><br>
+    7日つづけた方には、あなただけの<strong>「わたしのリズムレポート」</strong>が届きます。<br><br>
     一緒に実験してみませんか。<br>
     現在モニター期間のため、<strong>先着20名様まで無料です。</strong><br>
     <span style="font-size:.9em;">（一緒に内容を育ててくれる実験仲間の枠です。21人目からは 2,000円になります）</span>
@@ -246,15 +246,6 @@
       <span class="logo-script">Junko</span>
       <span class="logo-sub">50代からのからだ戦略</span>
     </div>
-    <nav class="footer-nav">
-      <a href="about.html">はじめまして</a>
-      <a href="taisetsu.html">大切にしていること</a>
-      <a href="service.html">サービス</a>
-      <a href="shijutsu.html">施術について</a>
-      <a href="ritsuyou.html">立腰体操</a>
-      <a href="access.html">施術場所</a>
-      <a href="index.html#voice">お客様の声</a>
-    </nav>
   </div>
   <p class="footer-copy">© Junko – Body Strategy Coach</p>
 </footer>
